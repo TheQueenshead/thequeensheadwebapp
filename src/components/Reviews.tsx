@@ -35,7 +35,7 @@ export default function Reviews() {
         </a>
       </div>
 
-      <ul className="grid gap-6 md:grid-cols-3">
+      <ul className="reveal-stagger grid gap-6 md:grid-cols-3">
         {site.reviews.map((r) => (
           <li key={r.name} className="flex flex-col rounded-[var(--radius-md)] bg-cream p-7">
             <Stars n={r.rating} />

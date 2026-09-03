@@ -24,7 +24,7 @@ export default function RoomsPage() {
       </PageHero>
 
       <Section tone="cream">
-        <div className="mb-14 grid gap-4 sm:grid-cols-3">
+        <div className="reveal-stagger mb-14 grid gap-4 sm:grid-cols-3">
           {[
             { k: "Check-in", v: roomsInfo.checkIn },
             { k: "Check-out", v: roomsInfo.checkOut },
@@ -42,7 +42,7 @@ export default function RoomsPage() {
             <article
               key={r.slug}
               id={r.slug}
-              className={`grid scroll-mt-28 items-center gap-8 lg:grid-cols-2 ${i % 2 ? "lg:[&>*:first-child]:order-2" : ""}`}
+              className={`reveal grid scroll-mt-28 items-center gap-8 lg:grid-cols-2 ${i % 2 ? "lg:[&>*:first-child]:order-2" : ""}`}
             >
               <div className="grid grid-cols-3 gap-3">
                 <div className="relative col-span-3 aspect-[4/3] overflow-hidden rounded-[var(--radius-md)] shadow-lift">

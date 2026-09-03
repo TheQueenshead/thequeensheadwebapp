@@ -47,7 +47,7 @@ export default function FaqPage() {
               ))}
             </ul>
           </nav>
-          <div className="space-y-14">
+          <div className="reveal-stagger space-y-14">
             {faqGroups.map((g, gi) => (
               <section key={g.title} id={g.title.toLowerCase().replace(/[^a-z]+/g, "-")} className="scroll-mt-28">
                 <h2 className="gold-rule mb-6 text-3xl">{g.title}</h2>

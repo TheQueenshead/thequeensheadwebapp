@@ -57,7 +57,23 @@ export const site = {
   ],
 
   /**
-   * STORY / PROMO VIDEO
+   * HERO BACKGROUND VIDEO (home page)
+   * A short, muted, looping clip behind the headline — 10–30 seconds, no
+   * sound needed, ideally under 5 MB (1280×720 H.264 MP4 is plenty; use
+   * HandBrake or ffmpeg to compress the client's film).
+   * Put the file at /public/video/hero.mp4 and set src: "/video/hero.mp4".
+   * Leave src empty to use the poster photo instead.
+   * A muted MP4 is the only format browsers will autoplay reliably —
+   * YouTube/Vimeo can't be used as a silent background.
+   */
+  heroVideo: {
+    src: "", // TODO e.g. "/video/hero.mp4"
+    poster: "exteriorEvening", // key from images.ts, shown until the video plays
+  },
+
+  /**
+   * STORY / PROMO VIDEO (the full film with sound, in the "Our story on film"
+   * section further down the home page)
    * type "mp4"     → src is a path in /public (e.g. "/video/story.mp4") or a CDN URL
    * type "youtube" → src is the YouTube video ID (e.g. "dQw4w9WgXcQ")
    * type "vimeo"   → src is the Vimeo video ID

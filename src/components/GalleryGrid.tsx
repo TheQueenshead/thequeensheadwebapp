@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { img, type ImageKey } from "@/data/images";
 
@@ -12,6 +12,16 @@ export default function GalleryGrid({ items }: { items: Item[] }) {
   const [open, setOpen] = useState<number | null>(null);
 
   const visible = cat === "All" ? items : items.filter((i) => i.cat === cat);
+  const gridRef = useRef<HTMLUListElement>(null);
+
+  // Re-run the stagger animation each time the filter changes
+  useEffect(() => {
+    const el = gridRef.current;
+    if (!el) return;
+    el.classList.remove("is-visible");
+    const id = requestAnimationFrame(() => el.classList.add("is-visible"));
+    return () => cancelAnimationFrame(id);
+  }, [cat]);
 
   // Keyboard: Esc closes, arrows navigate
   useEffect(() => {
@@ -47,7 +57,7 @@ export default function GalleryGrid({ items }: { items: Item[] }) {
         ))}
       </div>
 
-      <ul className="grid grid-cols-2 gap-3 md:grid-cols-4 md:auto-rows-[220px]">
+      <ul ref={gridRef} className="reveal-stagger grid grid-cols-2 gap-3 md:grid-cols-4 md:auto-rows-[220px]">
         {visible.map((item, i) => {
           const { src, alt } = img(item.id);
           return (

@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import JsonLd from "@/components/JsonLd";
+import RevealOnScroll from "@/components/RevealOnScroll";
 
 // Brand fonts, self-hosted (variable weight) — no Google request, faster, GDPR-friendly.
 const fraunces = localFont({
@@ -60,6 +61,7 @@ export default function RootLayout({
         <Footer />
         <WhatsAppButton />
         <JsonLd />
+        <RevealOnScroll />
       </body>
     </html>
   );

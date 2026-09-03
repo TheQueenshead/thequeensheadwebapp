@@ -33,7 +33,7 @@ export default function CareersPage() {
                 knowing about. Send us your details below and we&rsquo;ll keep them on file.
               </p>
             )}
-            <div className="space-y-6">
+            <div className="reveal-stagger space-y-6">
               {vacancies.map((v) => (
                 <Card key={v.title}>
                   <div className="flex flex-wrap items-start justify-between gap-3">

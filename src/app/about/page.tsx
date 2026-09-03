@@ -30,7 +30,7 @@ export default function AboutPage() {
 
       <Section tone="cream">
         <div className="grid items-center gap-12 lg:grid-cols-2">
-          <div className="relative aspect-[4/5] overflow-hidden rounded-[var(--radius-lg)] shadow-lift">
+          <div className="reveal relative aspect-[4/5] overflow-hidden rounded-[var(--radius-lg)] shadow-lift">
             <Photo id="fireplace" sizes="(max-width: 1024px) 100vw, 50vw" />
           </div>
           <div>
@@ -68,7 +68,7 @@ export default function AboutPage() {
       {/* Timeline */}
       <Section tone="ink">
         <SectionHead eyebrow="History" title="A building with stories to tell" center light />
-        <ol className="grid gap-6 md:grid-cols-3">
+        <ol className="reveal-stagger grid gap-6 md:grid-cols-3">
           {timeline.map((t) => (
             <li key={t.year} className="rounded-[var(--radius-md)] border border-white/10 bg-white/5 p-6">
               <p className="font-display text-3xl text-gold">{t.year}</p>
@@ -90,7 +90,7 @@ export default function AboutPage() {
           title="Things to see and do nearby"
           lede="We're in the middle of some of the loveliest countryside in the East of England, with a Jacobean palace at the end of the lane and a medieval market town up the road."
         />
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="reveal-stagger grid gap-6 md:grid-cols-2">
           {attractions.map((a) => (
             <article key={a.name} className="grid overflow-hidden rounded-[var(--radius-md)] bg-cream shadow-soft sm:grid-cols-[200px_1fr]">
               <div className="relative aspect-[4/3] sm:aspect-auto">
@@ -128,7 +128,7 @@ export default function AboutPage() {
               <Photo id="walking" sizes="(max-width: 1024px) 100vw, 40vw" />
             </div>
           </div>
-          <div className="grid gap-5 sm:grid-cols-2">
+          <div className="reveal-stagger grid gap-5 sm:grid-cols-2">
             {walks.map((w) => (
               <Card key={w.name}>
                 <span

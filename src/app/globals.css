@@ -256,11 +256,158 @@
   left: 0;
 }
 
+/* =========================================================
+   MOTION
+   - .reveal            fades/rises in when scrolled into view
+   - .reveal-stagger    children of a grid reveal one after another
+   - .hero-in           staggered entrance for hero text on page load
+   - .gold-rule         the gold underline draws itself in on reveal
+   Everything is disabled under prefers-reduced-motion.
+   ========================================================= */
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes ken-burns {
+  from {
+    transform: scale(1.08);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Stagger direct children: each one lands ~90ms after the previous.
+   Uses an animation with fill-mode "backwards" so once it finishes the
+   element returns to its natural styles — hover effects keep working. */
+.reveal-stagger > * {
+  opacity: 0;
+}
+.reveal-stagger.is-visible > * {
+  opacity: 1;
+  animation: rise-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+.reveal-stagger.is-visible > *:nth-child(1) { animation-delay: 0ms; }
+.reveal-stagger.is-visible > *:nth-child(2) { animation-delay: 90ms; }
+.reveal-stagger.is-visible > *:nth-child(3) { animation-delay: 180ms; }
+.reveal-stagger.is-visible > *:nth-child(4) { animation-delay: 270ms; }
+.reveal-stagger.is-visible > *:nth-child(5) { animation-delay: 360ms; }
+.reveal-stagger.is-visible > *:nth-child(6) { animation-delay: 450ms; }
+.reveal-stagger.is-visible > *:nth-child(n + 7) { animation-delay: 520ms; }
+
+/* Gold rule draws in from the left once its heading is revealed
+   (only when the heading sits inside a .reveal block) */
+.gold-rule::after {
+  transform-origin: left center;
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.25s;
+}
+.gold-rule.center::after {
+  transform-origin: center;
+}
+.reveal:not(.is-visible) .gold-rule::after {
+  transform: scaleX(0);
+}
+.reveal:not(.is-visible) .gold-rule.center::after {
+  transform: translateX(-50%) scaleX(0);
+}
+
+/* Hero: text lands in sequence on page load, photo eases in with a slow zoom */
+.hero-in > * {
+  animation: rise-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.hero-in > *:nth-child(1) { animation-delay: 0.15s; }
+.hero-in > *:nth-child(2) { animation-delay: 0.3s; }
+.hero-in > *:nth-child(3) { animation-delay: 0.45s; }
+.hero-in > *:nth-child(4) { animation-delay: 0.6s; }
+.hero-in > *:nth-child(5) { animation-delay: 0.75s; }
+
+.hero-photo {
+  /* transform-only, so opacity stays free for the video cross-fade */
+  animation: ken-burns 7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Header picks up a shadow once the page has scrolled */
+.header-scrolled {
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* WhatsApp button floats gently; pauses on hover */
+.float-soft {
+  animation: float-soft 3.5s ease-in-out infinite;
+}
+.float-soft:hover {
+  animation-play-state: paused;
+}
+
+/* Interactive cards lift on hover */
+.lift {
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.lift:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lift);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
-  .btn:hover {
+  .btn:hover,
+  .lift:hover {
     transform: none;
+  }
+  .reveal,
+  .reveal-stagger > * {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    animation: none;
+  }
+  .hero-in > *,
+  .hero-photo,
+  .float-soft {
+    animation: none;
   }
 }

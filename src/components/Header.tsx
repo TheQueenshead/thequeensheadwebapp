@@ -8,7 +8,15 @@ import { mainNav } from "@/data/nav";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   // Close the mobile menu whenever the route changes
   const [seenPath, setSeenPath] = useState(pathname);
@@ -29,7 +37,11 @@ export default function Header() {
     pathname === href || pathname.startsWith(href + "/");
 
   return (
-    <header className="sticky top-0 z-50 border-b border-black/10 bg-cream/95 backdrop-blur supports-[backdrop-filter]:bg-cream/85">
+    <header
+      className={`sticky top-0 z-50 border-b border-black/10 bg-cream/95 backdrop-blur transition-shadow duration-300 supports-[backdrop-filter]:bg-cream/85 ${
+        scrolled ? "header-scrolled" : ""
+      }`}
+    >
       <nav
         className="container-site flex items-center justify-between gap-4 py-3"
         aria-label="Main"

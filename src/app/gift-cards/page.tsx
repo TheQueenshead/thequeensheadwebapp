@@ -32,7 +32,7 @@ export default function GiftCardsPage() {
 
       <Section tone="cream">
         <SectionHead eyebrow="Ideas" title="Not sure how much? Here's what popular amounts buy" />
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="reveal-stagger grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {ideas.map((i) => (
             <Card key={i.title} className="text-center">
               <p className="font-display text-4xl text-wine">{i.amount}</p>
@@ -50,7 +50,7 @@ export default function GiftCardsPage() {
           </div>
           <div>
             <SectionHead eyebrow="How it works" title="Simple, like it should be" />
-            <ol className="space-y-5">
+            <ol className="reveal-stagger space-y-5">
               {[
                 ["Tell us the amount", "Any value from £20 upwards, and who it's for."],
                 ["We get in touch", "We'll confirm and take payment over the phone or by bank transfer."],

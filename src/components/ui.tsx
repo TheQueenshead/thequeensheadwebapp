@@ -48,12 +48,12 @@ export function PageHero({
       {image && (
         <>
           <div className="absolute inset-0 -z-10">
-            <Photo id={image} sizes="100vw" priority className="opacity-40" />
+            <Photo id={image} sizes="100vw" priority className="hero-photo opacity-40" />
           </div>
           <div className="absolute inset-0 -z-10 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
         </>
       )}
-      <div className="container-site py-16 md:py-24">
+      <div className="hero-in container-site py-16 md:py-24">
         {eyebrow && <p className="eyebrow !text-gold mb-3">{eyebrow}</p>}
         <h1 className="max-w-[16ch] text-4xl text-white md:text-6xl">{title}</h1>
         {lede && <p className="mt-5 max-w-[60ch] text-lg text-white/85">{lede}</p>}
@@ -102,7 +102,7 @@ export function SectionHead({
   light?: boolean;
 }) {
   return (
-    <div className={`mb-12 max-w-[680px] ${center ? "mx-auto text-center" : ""}`}>
+    <div className={`reveal mb-12 max-w-[680px] ${center ? "mx-auto text-center" : ""}`}>
       {eyebrow && <p className="eyebrow mb-3">{eyebrow}</p>}
       <h2 className={`gold-rule text-3xl md:text-[2.6rem] ${center ? "center" : ""}`}>{title}</h2>
       {lede && <p className={`mt-5 text-lg ${light ? "text-white/80" : "text-muted"}`}>{lede}</p>}
@@ -129,7 +129,7 @@ export function ImageTile({
   return (
     <Link
       href={href}
-      className={`group relative block overflow-hidden rounded-[var(--radius-md)] no-underline hover:no-underline ${
+      className={`group lift relative block overflow-hidden rounded-[var(--radius-md)] no-underline hover:no-underline ${
         tall ? "aspect-[3/4]" : "aspect-[4/3]"
       } ${className}`}
     >
@@ -170,7 +170,7 @@ export function CTABand({
 }) {
   return (
     <Section tone={tone} className="!py-14">
-      <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
+      <div className="reveal flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
         <div>
           <h2 className="text-3xl md:text-4xl">{title}</h2>
           {text && <p className="mt-2 max-w-[56ch] text-white/85">{text}</p>}
@@ -199,7 +199,7 @@ export function Card({
   className?: string;
 }) {
   return (
-    <div className={`rounded-[var(--radius-md)] border border-black/5 bg-white p-7 shadow-soft ${className}`}>
+    <div className={`lift rounded-[var(--radius-md)] border border-black/5 bg-white p-7 shadow-soft ${className}`}>
       {children}
     </div>
   );

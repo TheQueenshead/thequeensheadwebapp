@@ -43,9 +43,9 @@ export default function BlogPage() {
           </Link>
         )}
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="reveal-stagger grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {rest.map((p) => (
-            <article key={p.slug} className="group overflow-hidden rounded-[var(--radius-md)] bg-white shadow-soft">
+            <article key={p.slug} className="group lift overflow-hidden rounded-[var(--radius-md)] bg-white shadow-soft">
               <Link href={`/blog/${p.slug}`} className="block no-underline hover:no-underline">
                 <div className="relative aspect-[16/10] overflow-hidden">
                   <Photo id={p.image} sizes="(max-width: 768px) 100vw, 33vw" className="transition-transform duration-700 group-hover:scale-105" />

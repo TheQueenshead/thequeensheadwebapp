@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Photo, Section, SectionHead, ImageTile, CTABand } from "@/components/ui";
 import StoryVideo from "@/components/StoryVideo";
+import HeroVideo from "@/components/HeroVideo";
 import Reviews from "@/components/Reviews";
 import MapEmbed from "@/components/MapEmbed";
 import NewsletterForm from "@/components/forms/NewsletterForm";
@@ -20,11 +21,9 @@ export default function HomePage() {
     <>
       {/* ---------- HERO ---------- */}
       <section className="relative isolate flex min-h-[88svh] items-end overflow-hidden bg-ink text-white">
-        <div className="absolute inset-0 -z-10">
-          <Photo id="exteriorEvening" sizes="100vw" priority />
-        </div>
-        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-black/85 via-black/35 to-black/20" />
-        <div className="container-site w-full pb-16 pt-32 md:pb-24">
+        <HeroVideo />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-black/85 via-black/40 to-black/25" />
+        <div className="hero-in container-site w-full pb-16 pt-32 md:pb-24">
           <p className="eyebrow !text-gold mb-4">Littlebury · Saffron Walden · Essex</p>
           <h1 className="max-w-[14ch] text-5xl leading-[1.02] text-white md:text-7xl">
             A 14th-century inn with a very warm welcome
@@ -50,7 +49,7 @@ export default function HomePage() {
       {/* ---------- WELCOME ---------- */}
       <Section tone="cream">
         <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.1fr]">
-          <div>
+          <div className="reveal">
             <p className="eyebrow mb-3">Welcome</p>
             <h2 className="gold-rule text-3xl md:text-[2.75rem]">
               The living room of the village, since 1340
@@ -77,7 +76,7 @@ export default function HomePage() {
               </Link>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="reveal-stagger grid grid-cols-2 gap-4">
             <div className="relative aspect-[3/4] overflow-hidden rounded-[var(--radius-md)] shadow-lift">
               <Photo id="barInterior" sizes="(max-width: 1024px) 50vw, 30vw" />
             </div>
@@ -96,7 +95,7 @@ export default function HomePage() {
           lede="Four good reasons to find us — and a few more once you're here."
           center
         />
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+        <div className="reveal-stagger grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           <ImageTile href="/menu" image="steak" subtitle="Eat" title="Food & Drink" tall />
           <ImageTile href="/rooms" image="roomOne" subtitle="Stay" title="Six Bedrooms" tall />
           <ImageTile href="/events" image="liveMusic" subtitle="What's on" title="Events" tall />
@@ -113,7 +112,9 @@ export default function HomePage() {
           center
           light
         />
-        <StoryVideo />
+        <div className="reveal">
+          <StoryVideo />
+        </div>
       </Section>
 
       {/* ---------- ROOMS ---------- */}
@@ -128,12 +129,12 @@ export default function HomePage() {
             All rooms & rates
           </Link>
         </div>
-        <div className="grid gap-6 md:grid-cols-3">
+        <div className="reveal-stagger grid gap-6 md:grid-cols-3">
           {featuredRooms.map((r) => (
             <Link
               key={r.slug}
               href={`/rooms#${r.slug}`}
-              className="group overflow-hidden rounded-[var(--radius-md)] bg-white shadow-soft no-underline hover:no-underline"
+              className="group lift overflow-hidden rounded-[var(--radius-md)] bg-white shadow-soft no-underline hover:no-underline"
             >
               <div className="relative aspect-[4/3] overflow-hidden">
                 <Photo id={r.images[0]} className="transition-transform duration-700 group-hover:scale-105" sizes="(max-width: 768px) 100vw, 33vw" />
@@ -163,7 +164,7 @@ export default function HomePage() {
             />
             <NewsletterForm />
           </div>
-          <ul className="space-y-4">
+          <ul className="reveal-stagger space-y-4">
             {nextEvents.map((e) => {
               const d = eventDateParts(e.date);
               return (
@@ -234,7 +235,9 @@ export default function HomePage() {
               </Link>
             </div>
           </div>
-          <MapEmbed />
+          <div className="reveal">
+            <MapEmbed />
+          </div>
         </div>
       </Section>
 

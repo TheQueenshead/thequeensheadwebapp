@@ -50,7 +50,17 @@ placeholders instead (handy offline or to check layout).
 
 ## Adding the video
 
-In `src/data/site.ts` → `video`:
+There are two places for video, both set in `src/data/site.ts`:
+
+**1. Hero background (`heroVideo`)** — a silent, looping clip behind the home
+page headline. Use a short cut (10–30 s) compressed to under ~5 MB as a
+1280×720 H.264 MP4, e.g.
+`ffmpeg -i film.mp4 -an -t 25 -vf scale=1280:-2 -crf 28 -movflags +faststart public/video/hero.mp4`.
+Set `heroVideo.src: "/video/hero.mp4"`. The poster photo shows first and for
+anyone with reduced motion or data-saver on. Only MP4 works here — browsers
+won't autoplay YouTube silently as a background.
+
+**2. The full film (`video`)** — the "Our story on film" section with sound:
 
 - **MP4 file**: put it at `public/video/story.mp4` (keep it under ~20 MB; H.264,
   1080p is plenty) and set `type: "mp4", src: "/video/story.mp4"`.
@@ -104,6 +114,20 @@ automatically. Everything else is static and very fast.
 - [ ] Resend domain verified, env vars set, send a test enquiry
 - [ ] Add a favicon (`src/app/favicon.ico`) from the client's logo
 - [ ] Submit `https://<domain>/sitemap.xml` in Google Search Console
+
+## Animation
+
+Motion is handled with plain CSS plus one tiny component (`src/components/RevealOnScroll.tsx`),
+no animation library:
+
+- `reveal` — a block fades and rises in when scrolled into view
+- `reveal-stagger` — children of a grid/list land one after another
+- `hero-in` — hero text enters in sequence on page load; `hero-photo` gives the hero image a slow zoom
+- `lift` — cards rise slightly on hover
+- gold underlines draw themselves in; the header gains a shadow once scrolled
+
+Add `reveal` or `reveal-stagger` to any element to animate it. Everything is
+automatically disabled for visitors who have "reduce motion" switched on.
 
 ## Built with
 

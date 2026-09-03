@@ -29,9 +29,9 @@ export default function PrivateDiningPage() {
           title="Four ways to gather"
           lede="Capacities are a guide — tell us about your event and we'll suggest the right space and layout."
         />
-        <div className="grid gap-8 md:grid-cols-2">
+        <div className="reveal-stagger grid gap-8 md:grid-cols-2">
           {spaces.map((s) => (
-            <article key={s.name} className="overflow-hidden rounded-[var(--radius-md)] bg-white shadow-soft">
+            <article key={s.name} className="lift overflow-hidden rounded-[var(--radius-md)] bg-white shadow-soft">
               <div className="relative aspect-[16/9]">
                 <Photo id={s.image} sizes="(max-width: 768px) 100vw, 50vw" />
                 <div className="absolute left-4 top-4 flex gap-2">

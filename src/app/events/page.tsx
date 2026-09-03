@@ -33,7 +33,7 @@ export default function EventsPage() {
 
       {/* Regulars */}
       <Section tone="white" className="!py-12">
-        <div className="grid gap-4 md:grid-cols-4">
+        <div className="reveal-stagger grid gap-4 md:grid-cols-4">
           {recurring.map((r) => (
             <Card key={r.title} className="!p-5">
               <p className="text-xs font-semibold uppercase tracking-wider text-wine">{r.day}</p>
@@ -57,7 +57,7 @@ export default function EventsPage() {
           {months.map(([month, evs]) => (
             <div key={month}>
               <h3 className="mb-6 font-display text-2xl text-wine">{month}</h3>
-              <ol className="space-y-5">
+              <ol className="reveal-stagger space-y-5">
                 {evs.map((e) => {
                   const d = eventDateParts(e.date);
                   return (
