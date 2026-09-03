@@ -1,0 +1,31 @@
+import type { ImageKey } from "./images";
+
+/** Add or remove photos here. `cat` drives the filter buttons. */
+export const gallery: { id: ImageKey; cat: string; wide?: boolean }[] = [
+  { id: "exteriorEvening", cat: "The pub", wide: true },
+  { id: "barInterior", cat: "The pub" },
+  { id: "fireplace", cat: "The pub" },
+  { id: "diningRoom", cat: "The pub" },
+  { id: "garden", cat: "The pub" },
+  { id: "exteriorDay", cat: "The pub" },
+  { id: "roast", cat: "Food & drink" },
+  { id: "steak", cat: "Food & drink", wide: true },
+  { id: "fishChips", cat: "Food & drink" },
+  { id: "dessert", cat: "Food & drink" },
+  { id: "ale", cat: "Food & drink" },
+  { id: "wine", cat: "Food & drink" },
+  { id: "breakfast", cat: "Food & drink" },
+  { id: "roomSix", cat: "Rooms", wide: true },
+  { id: "roomOne", cat: "Rooms" },
+  { id: "roomTwo", cat: "Rooms" },
+  { id: "roomThree", cat: "Rooms" },
+  { id: "bathroom", cat: "Rooms" },
+  { id: "team", cat: "People & events" },
+  { id: "chef", cat: "People & events" },
+  { id: "liveMusic", cat: "People & events" },
+  { id: "celebration", cat: "People & events", wide: true },
+  { id: "audleyEnd", cat: "Local area" },
+  { id: "countryside", cat: "Local area", wide: true },
+  { id: "saffronWalden", cat: "Local area" },
+  { id: "walking", cat: "Local area" },
+];

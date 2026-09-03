@@ -1,0 +1,266 @@
+@import "tailwindcss";
+
+/* =========================================================
+   THE QUEEN'S HEAD, LITTLEBURY — DESIGN TOKENS
+   Ported from the agreed brand design system (css/style.css)
+     ink   #000000  text / deep contrast
+     wine  #8E1616  primary accent — signage red
+     gold  #E8C999  secondary accent — warm brass
+     cream #F8EEDF  background — parchment
+   ========================================================= */
+
+@theme {
+  --color-ink: #000000;
+  --color-wine: #8e1616;
+  --color-wine-dark: #6e1010;
+  --color-gold: #e8c999;
+  --color-gold-dark: #d8b57c;
+  --color-cream: #f8eedf;
+  --color-body: #2a2321;
+  --color-muted: #6b5f57;
+  --color-whatsapp: #25d366;
+
+  --font-display: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  --font-body: var(--font-work-sans), -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+
+  --radius-sm: 6px;
+  --radius-md: 14px;
+  --radius-lg: 28px;
+
+  --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-lift: 0 12px 32px rgba(0, 0, 0, 0.14);
+}
+
+/* Base styles live in @layer base so utility classes can override them */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-cream text-body font-body antialiased;
+    line-height: 1.6;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display text-ink font-semibold;
+    line-height: 1.12;
+  }
+
+  ::selection {
+    background: var(--color-gold);
+    color: var(--color-ink);
+  }
+
+  /* Focus rings — visible everywhere for keyboard users */
+  :focus-visible {
+    outline: 3px solid var(--color-gold-dark);
+    outline-offset: 3px;
+  }
+}
+
+/* ---------- Utilities used across pages ---------- */
+@utility container-site {
+  max-width: 1180px;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 3rem);
+}
+
+@utility eyebrow {
+  display: inline-block;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  color: var(--color-wine);
+}
+
+@utility hero-gradient {
+  background: linear-gradient(160deg, #000 0%, #241010 45%, #8e1616 100%);
+}
+
+@utility btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.85rem 1.6rem;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background 0.15s ease,
+    color 0.15s ease;
+}
+.btn:hover {
+  transform: translateY(-2px);
+}
+.btn:disabled {
+  opacity: 0.6;
+  cursor: wait;
+  transform: none;
+}
+
+@utility btn-primary {
+  background: var(--color-wine);
+  color: #fff;
+  box-shadow: var(--shadow-soft);
+}
+.btn-primary:hover {
+  background: var(--color-wine-dark);
+  box-shadow: var(--shadow-lift);
+}
+
+@utility btn-gold {
+  background: var(--color-gold);
+  color: var(--color-ink);
+  box-shadow: var(--shadow-soft);
+}
+.btn-gold:hover {
+  background: var(--color-gold-dark);
+}
+
+@utility btn-outline {
+  background: transparent;
+  border-color: var(--color-ink);
+  color: var(--color-ink);
+}
+.btn-outline:hover {
+  background: var(--color-ink);
+  color: #fff;
+}
+
+@utility btn-outline-light {
+  background: transparent;
+  border-color: #fff;
+  color: #fff;
+}
+.btn-outline-light:hover {
+  background: #fff;
+  color: var(--color-ink);
+}
+
+@utility btn-sm {
+  padding: 0.55rem 1.1rem;
+  font-size: 0.85rem;
+}
+
+/* Form controls */
+@utility field {
+  width: 100%;
+  padding: 0.8rem 0.95rem;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid rgba(0, 0, 0, 0.18);
+  font-size: 0.95rem;
+  background: var(--color-cream);
+  color: var(--color-body);
+}
+.field:focus {
+  outline: none;
+  border-color: var(--color-wine);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(142, 22, 22, 0.12);
+}
+
+@utility label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.85rem;
+  margin-bottom: 0.4rem;
+  color: var(--color-ink);
+}
+
+@utility tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.15rem 0.5rem;
+  border-radius: 5px;
+  background: var(--color-cream);
+  border: 1px solid var(--color-gold-dark);
+  color: var(--color-wine-dark);
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+}
+
+/* Decorative gold rule under headings */
+@utility gold-rule {
+  position: relative;
+  padding-bottom: 1rem;
+}
+.gold-rule::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 56px;
+  height: 3px;
+  background: var(--color-gold-dark);
+}
+.gold-rule.center::after {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Prose for blog posts */
+.prose-brand h2 {
+  @apply text-2xl mt-10 mb-3;
+}
+.prose-brand h3 {
+  @apply text-xl mt-8 mb-2;
+}
+.prose-brand p {
+  @apply mb-5 leading-relaxed;
+}
+.prose-brand ul,
+.prose-brand ol {
+  @apply mb-5 pl-6;
+}
+.prose-brand ul {
+  list-style: disc;
+}
+.prose-brand ol {
+  list-style: decimal;
+}
+.prose-brand li {
+  @apply mb-1.5;
+}
+.prose-brand a {
+  @apply text-wine underline;
+}
+.prose-brand blockquote {
+  @apply border-l-4 border-gold-dark pl-5 italic text-muted my-6;
+}
+
+/* Skip link */
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: var(--color-ink);
+  color: #fff;
+  padding: 0.75rem 1.25rem;
+  z-index: 1000;
+  border-radius: 0 0 8px 0;
+}
+.skip-link:focus {
+  left: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .btn:hover {
+    transform: none;
+  }
+}
