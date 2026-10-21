@@ -8,7 +8,7 @@ import { site } from "@/data/site";
 export const metadata: Metadata = {
   title: "Contact & Directions",
   description:
-    "Find The Queen's Head in Littlebury, near Saffron Walden. Address, opening hours, map, directions, phone, email and WhatsApp.",
+    "Find The Queen's Head in Littlebury, near Saffron Walden. Address, opening hours, map, directions and how to get in touch.",
 };
 
 export default function ContactPage() {
@@ -18,7 +18,7 @@ export default function ContactPage() {
       <PageHero
         eyebrow="Contact"
         title="Say hello"
-        lede="Call, email, WhatsApp or drop in — whichever suits. We're a small team, so if we don't pick up straight away we're probably carrying plates; we'll get back to you."
+        lede="Get in touch or drop in — whichever suits. We're a small team, so if we don't pick up straight away we're probably carrying plates; we'll get back to you."
         image="exteriorDay"
       />
 
@@ -28,6 +28,7 @@ export default function ContactPage() {
             <div>
               <h2 className="text-2xl">Get in touch</h2>
               <ul className="mt-4 space-y-3">
+                {site.phone && (
                 <li className="flex items-center gap-4 rounded-[var(--radius-md)] bg-white p-4 shadow-soft">
                   <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-gold text-ink" aria-hidden="true">☎</span>
                   <div>
@@ -35,6 +36,7 @@ export default function ContactPage() {
                     <a href={site.phoneHref} className="font-semibold text-ink">{site.phone}</a>
                   </div>
                 </li>
+                )}
                 <li className="flex items-center gap-4 rounded-[var(--radius-md)] bg-white p-4 shadow-soft">
                   <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-gold text-ink" aria-hidden="true">✉</span>
                   <div>
@@ -42,6 +44,7 @@ export default function ContactPage() {
                     <a href={`mailto:${site.email}`} className="font-semibold text-ink break-all">{site.email}</a>
                   </div>
                 </li>
+                {site.whatsapp && (
                 <li className="flex items-center gap-4 rounded-[var(--radius-md)] bg-white p-4 shadow-soft">
                   <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-whatsapp text-white" aria-hidden="true">
                     <svg viewBox="0 0 32 32" className="h-6 w-6" fill="currentColor"><path d="M16 3C9.4 3 4 8.3 4 14.9c0 2.3.7 4.6 1.9 6.6L4 29l7.7-1.9c1.4.7 2.9 1 4.3 1 6.6 0 12-5.3 12-11.9S22.6 3 16 3zm0 21.8c-1.3 0-2.6-.3-3.8-1l-.3-.2-4.4 1.1 1.2-4.2-.2-.3a9.7 9.7 0 0 1-1.7-5.3c0-5.4 4.1-9.7 9.2-9.7s9.2 4.3 9.2 9.7-4.1 9.9-9.2 9.9z"/></svg>
@@ -53,6 +56,7 @@ export default function ContactPage() {
                     </a>
                   </div>
                 </li>
+                )}
               </ul>
               <SocialLinks dark className="mt-5" />
             </div>
@@ -66,7 +70,7 @@ export default function ContactPage() {
                     <tr key={h.day} className="border-b border-dashed border-black/10">
                       <th scope="row" className="py-2 text-left font-semibold">{h.day}</th>
                       <td className="py-2 text-right text-muted">
-                        {h.open === "Closed" ? "Closed" : `${h.open} – ${h.close}`}
+                        {h.close ? `${h.open} – ${h.close}` : h.open}
                       </td>
                     </tr>
                   ))}
@@ -80,7 +84,7 @@ export default function ContactPage() {
                   </div>
                 ))}
               </dl>
-              <p className="mt-3 text-xs text-muted">Open bank holiday Mondays. Hours may vary over Christmas — check our socials.</p>
+              <p className="mt-3 text-xs text-muted">Open 7 days a week for private bookings — get in touch to arrange. Hours may vary over Christmas — check our socials.</p>
             </div>
 
             <div>
@@ -91,9 +95,8 @@ export default function ContactPage() {
                 {site.address.county} {site.address.postcode}
               </address>
               <ul className="mt-4 space-y-2 text-sm text-body">
-                <li><strong>By car:</strong> just off the B1383, two miles north of Saffron Walden. Free parking at the rear with two EV chargers. Junction 9 of the M11 is 10 minutes away.</li>
-                <li><strong>By train:</strong> Audley End station (London Liverpool Street 55 min, Cambridge 20 min) is just over a mile — a 20-minute walk or short taxi.</li>
-                <li><strong>On foot or bike:</strong> we&rsquo;re on the Harcamlow Way; there&rsquo;s a bike rack by the coach arch.</li>
+                <li><strong>By car:</strong> on the High Street (B1383), a mile and a half north-west of Saffron Walden. The M11 (junction 9) is about three miles away.</li>
+                <li><strong>By train:</strong> Audley End station has direct trains from London Liverpool Street (from about 55 minutes) and Cambridge (about 20 minutes). It&rsquo;s about two miles from us — a short taxi ride, or a 45-minute walk.</li>
               </ul>
               <a href={site.map.directionsUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary mt-5">
                 Get directions

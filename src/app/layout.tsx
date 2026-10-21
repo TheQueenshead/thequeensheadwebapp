@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import JsonLd from "@/components/JsonLd";
 import RevealOnScroll from "@/components/RevealOnScroll";
+import { hasBlog } from "@/lib/blog";
 
 // Brand fonts, self-hosted (variable weight) — no Google request, faster, GDPR-friendly.
 const fraunces = localFont({
@@ -48,17 +49,19 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  // Hide the Blog links while every post is a draft
+  const showBlog = hasBlog();
   return (
     <html lang="en-GB" className={`${fraunces.variable} ${workSans.variable}`}>
       <body className="min-h-screen flex flex-col">
         <a href="#main" className="skip-link">
           Skip to main content
         </a>
-        <Header />
+        <Header showBlog={showBlog} />
         <main id="main" className="flex-1">
           {children}
         </main>
-        <Footer />
+        <Footer showBlog={showBlog} />
         <WhatsAppButton />
         <JsonLd />
         <RevealOnScroll />

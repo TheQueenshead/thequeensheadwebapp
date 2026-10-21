@@ -1,4 +1,5 @@
 ---
+draft: true # hidden until the content is checked — delete this line to publish
 title: "What's new on the autumn menu"
 date: "2026-09-01"
 excerpt: "Game is back, the pumpkins are in, and there's a new pie. Head chef Dan talks us through the dishes he's most excited about this season."

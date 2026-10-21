@@ -1,6 +1,7 @@
 import { site } from "@/data/site";
 
 export default function WhatsAppButton() {
+  if (!site.whatsapp) return null;
   const text = encodeURIComponent(
     "Hello, I'd like to make an enquiry at The Queen's Head.",
   );

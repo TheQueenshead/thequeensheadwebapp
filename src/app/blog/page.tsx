@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { PageHero, Photo, Section } from "@/components/ui";
 import NewsletterForm from "@/components/forms/NewsletterForm";
 import { getPosts, formatDate } from "@/lib/blog";
@@ -12,6 +13,8 @@ export const metadata: Metadata = {
 
 export default function BlogPage() {
   const posts = getPosts();
+  // Every post is a draft — keep the blog hidden
+  if (posts.length === 0) notFound();
   const [first, ...rest] = posts;
 
   return (

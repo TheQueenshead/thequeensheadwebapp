@@ -1,4 +1,5 @@
 ---
+draft: true # hidden until the content is checked — delete this line to publish
 title: "Seven hundred years of the Queen's Head"
 date: "2026-07-20"
 excerpt: "Coaching inn, courthouse, wartime billet. A short history of the building we're lucky enough to look after."

@@ -47,8 +47,16 @@ export const enquirySchema = z.object({
   phone: z.string().trim().max(40).optional().or(z.literal("")),
   // Honeypot — real people never fill this in
   website: z.string().max(0).optional().or(z.literal("")),
-  // Any other fields the specific form collects
-  fields: z.record(z.string(), z.string().max(2000)).default({}),
+  // Cloudflare Turnstile token (see src/lib/guard.ts)
+  captcha: z.string().max(4096).optional(),
+  // Any other fields the specific form collects — only names listed in
+  // fieldLabels below are accepted. Add new form fields there first.
+  fields: z
+    .record(z.string(), z.string().max(2000))
+    .refine((f) => Object.keys(f).every((k) => k in fieldLabels), {
+      message: "Please check the form and try again.",
+    })
+    .default({}),
 });
 
 export type EnquiryPayload = z.infer<typeof enquirySchema>;

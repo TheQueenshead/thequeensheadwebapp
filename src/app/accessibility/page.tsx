@@ -25,16 +25,11 @@ export default function AccessibilityPage() {
           </p>
           <h2>At the pub</h2>
           <ul>
-            <li>Level access from the car park to the bar and restaurant via the rear entrance.</li>
-            <li>An accessible toilet on the ground floor.</li>
-            <li>The Coach House bedroom has step-free access, a private entrance and a wet-room.</li>
-            <li>Assistance dogs are welcome everywhere; all dogs are welcome in the bar and garden.</li>
-            <li>Large-print menus are available — just ask.</li>
-            <li>Two accessible parking bays by the rear entrance.</li>
+            <li>Assistance dogs are welcome.</li>
           </ul>
           <p>
             Our building is nearly 700 years old, so some floors are uneven and the upstairs
-            bedrooms are reached by a staircase. Please call us before your visit if you have
+            bedrooms are reached by a staircase. Please get in touch before your visit if you have
             particular requirements and we&rsquo;ll do everything we can to help.
           </p>
         </div>

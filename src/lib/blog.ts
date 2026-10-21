@@ -9,6 +9,10 @@ import type { ImageKey } from "@/data/images";
  * Posts are Markdown files in /content/blog. To add a post, create a
  * new .md file with the same front-matter as the existing ones. The
  * file name becomes the URL (my-post.md → /blog/my-post).
+ *
+ * Add `draft: true` to a post's front-matter to hide it. While every post
+ * is a draft the whole blog is hidden: no menu links, /blog returns "not
+ * found", and it's left out of the sitemap.
  */
 export type Post = {
   slug: string;
@@ -18,6 +22,7 @@ export type Post = {
   image: ImageKey;
   category: string;
   content: string;
+  draft: boolean;
 };
 
 const dir = path.join(process.cwd(), "content", "blog");
@@ -38,10 +43,15 @@ export function getPosts(): Post[] {
         image: (data.image ?? "exteriorDay") as ImageKey,
         category: data.category ?? "News",
         content,
+        draft: data.draft === true,
       };
     })
+    .filter((p) => !p.draft)
     .sort((a, b) => (a.date < b.date ? 1 : -1));
 }
+
+/** True when at least one post is published — controls the blog menu links */
+export const hasBlog = () => getPosts().length > 0;
 
 export function getPost(slug: string): Post | undefined {
   return getPosts().find((p) => p.slug === slug);

@@ -1,37 +1,36 @@
-/** FAQ — grouped. Edit freely; the page renders whatever is here. */
+/**
+ * FAQ — grouped. Edit freely; the page renders whatever is here.
+ * Only include answers the pub has confirmed. Ideas to add once known:
+ * children's policy, dogs, parking, check-in/out times, breakfast,
+ * accessible rooms, private-hire capacities.
+ */
 export const faqGroups = [
   {
     title: "Eating & drinking",
     items: [
-      { q: "Do I need to book a table?", a: "Walk-ins are always welcome in the bar, but we'd recommend booking for the restaurant — especially Friday and Saturday evenings and Sunday lunch, when we're often full. Use the Book a Table page or call us." },
-      { q: "Do you cater for allergies and dietary requirements?", a: "Yes. Our menu carries dietary tags and full allergen information, and the kitchen is happy to adapt dishes where it safely can. Please tell us about any allergies when you book and again when you order." },
-      { q: "Is the pub child-friendly?", a: "Very much so. We have a children's menu, high chairs, and plenty of space in the garden. Children are welcome in all areas until 9pm." },
-      { q: "What time is the kitchen open?", a: "Lunch is served Tuesday to Sunday 12–2.30pm (Sunday roast until 5pm), and dinner Tuesday to Saturday 6–9pm. The bar is open all day. We're closed on Mondays except bank holidays." },
+      { q: "When are you open?", a: "We're open to everyone Wednesday to Saturday from 6pm until close. We're also open 7 days a week for private bookings — get in touch to arrange yours." },
+      { q: "Do I need to book a table?", a: "We'd recommend it, especially on Friday and Saturday evenings. Use the Book a Table page or send us a message." },
+      { q: "Do you cater for allergies and dietary requirements?", a: "Please tell us about any allergies or dietary needs when you book and again when you order. The team will talk you through what's on and adapt a dish where we safely can." },
     ],
   },
   {
     title: "Staying with us",
     items: [
-      { q: "What time is check-in and check-out?", a: "Check-in is from 3pm and check-out by 11am. If you're arriving later than 9pm, please let us know in advance so we can arrange your key." },
-      { q: "Is breakfast included?", a: "Yes — all our room rates include a full English or continental breakfast, served in the restaurant from 8am on weekdays and 8.30am at weekends." },
-      { q: "Is there parking?", a: "Yes, free parking for guests and diners in our car park at the rear, with two EV charging points." },
-      { q: "Can I bring my dog?", a: "Dogs are welcome in the bar, garden and in our dog-friendly bedroom, The Orchard (£20 per night). We ask that dogs are kept on a lead and off the furniture." },
-      { q: "Do you have accessible rooms?", a: "The Coach House is a ground-floor room with step-free access, a private entrance and a wet-room. The bar and restaurant are on the ground floor with an accessible toilet." },
+      { q: "How do I book a room?", a: "Send us an enquiry from the Rooms page with your dates and we'll come back to you with availability and rates." },
     ],
   },
   {
     title: "Events & private hire",
     items: [
-      { q: "Can I hire the pub for a private event?", a: "Yes. Our private dining room seats up to 24, the garden marquee up to 80, and the whole pub is available for exclusive hire. See the Private Dining page or send us an enquiry." },
-      { q: "Do you host weddings?", a: "We host intimate wedding receptions and celebrations for up to 80 guests. Littlebury's church is a two-minute walk away. Get in touch and we'll talk it through." },
-      { q: "Do you sell gift cards?", a: "We do — for any value, redeemable against food, drink or a stay. Visit the Gift Cards page to enquire, or pick one up at the bar." },
+      { q: "Can I book the pub for a private event?", a: "Yes — we're open 7 days a week for private bookings. Tell us about your event on the Private Dining page and we'll come back to you with availability and options." },
+      { q: "Do you sell gift cards?", a: "We do. Visit the Gift Cards page to enquire." },
     ],
   },
   {
     title: "Getting here",
     items: [
-      { q: "How do I get to you by public transport?", a: "Audley End railway station is just over a mile away, with direct trains from London Liverpool Street (about 55 minutes) and Cambridge (about 20 minutes). It's a pleasant 20-minute walk or a short taxi ride." },
-      { q: "Where exactly are you?", a: "We're on the High Street in Littlebury, just off the B1383, two miles north of Saffron Walden and a mile from Audley End House. There's a map and directions on our Contact page." },
+      { q: "How do I get to you by public transport?", a: "Audley End railway station is about two miles away, with direct trains from London Liverpool Street (from about 55 minutes) and Cambridge (about 20 minutes). It's a short taxi ride, or around a 45-minute walk." },
+      { q: "Where exactly are you?", a: "We're on the High Street (the B1383) in Littlebury, a mile and a half north-west of Saffron Walden and a mile from Audley End House. There's a map and directions on our Contact page." },
     ],
   },
 ];

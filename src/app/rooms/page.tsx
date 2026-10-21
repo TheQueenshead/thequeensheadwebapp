@@ -1,15 +1,76 @@
 import type { Metadata } from "next";
 import { PageHero, Photo, Section, SectionHead, Notice } from "@/components/ui";
 import EnquiryForm from "@/components/forms/EnquiryForm";
+import BookingComLink from "@/components/BookingComLink";
 import { rooms, roomsInfo } from "@/data/rooms";
+import { site } from "@/data/site";
 
-export const metadata: Metadata = {
-  title: "Rooms — Stay at the Inn",
-  description:
-    "Six characterful bedrooms above a 14th-century pub in Littlebury, near Saffron Walden and Audley End. Breakfast included, dogs welcome, free parking. Check availability.",
-};
+export const metadata: Metadata = site.comingSoon.rooms
+  ? {
+      title: "Rooms — Stay at the Inn",
+      description:
+        "Bedrooms above a 14th-century pub in Littlebury, near Saffron Walden and Audley End. See our rooms and rates, or send us an availability enquiry.",
+    }
+  : {
+      title: "Rooms — Stay at the Inn",
+      description:
+        "Six characterful bedrooms above a 14th-century pub in Littlebury, near Saffron Walden and Audley End. Breakfast included, dogs welcome, free parking. Check availability.",
+    };
 
 export default function RoomsPage() {
+  return site.comingSoon.rooms ? <RoomsComingSoon /> : <FullRooms />;
+}
+
+/** Shown while site.comingSoon.rooms is true — rooms are shown on Booking.com */
+function RoomsComingSoon() {
+  const hasListing = Boolean(site.bookingComUrl);
+  return (
+    <>
+      <PageHero
+        eyebrow="Stay with us"
+        title="Rooms above the pub"
+        lede={
+          hasListing
+            ? "Our room pages are coming soon. In the meantime you can see every room — with photos, rates and live availability — on Booking.com."
+            : "Our room pages are coming soon. In the meantime, send us an enquiry and we'll get straight back to you with availability and rates."
+        }
+        image="roomSix"
+      >
+        <BookingComLink />
+        <a href="#enquire" className={hasListing ? "btn btn-outline-light" : "btn btn-gold"}>
+          Enquire direct
+        </a>
+      </PageHero>
+
+      <Section tone="white">
+        <div className="mx-auto max-w-3xl text-center">
+          <SectionHead
+            eyebrow="Coming soon"
+            title="A proper look at our rooms"
+            lede={
+              hasListing
+                ? "We're putting together photos and details of each room for this page. Until then, everything you need — and instant booking — is on our Booking.com page."
+                : "We're putting together photos and details of each room for this page. Check back soon, or get in touch and we'll tell you all about them."
+            }
+            center
+          />
+          <div className="flex flex-wrap justify-center gap-3">
+            <BookingComLink className="btn btn-primary" label="See rooms & book on Booking.com" />
+            {site.phone && (
+            <a href={site.phoneHref} className="btn btn-outline">
+              Call {site.phone}
+            </a>
+            )}
+          </div>
+        </div>
+      </Section>
+
+      <RoomEnquiry />
+    </>
+  );
+}
+
+function FullRooms() {
   return (
     <>
       <PageHero
@@ -122,39 +183,48 @@ export default function RoomsPage() {
         </div>
       </Section>
 
-      <Section tone="cream" id="enquire" className="scroll-mt-20">
-        <div className="mx-auto max-w-3xl">
-          <SectionHead
-            eyebrow="Availability enquiry"
-            title="Check availability"
-            lede="Tell us when you'd like to come and which room you have in mind. We'll reply with availability and how to confirm your booking — usually within a few hours."
-            center
-          />
-          <div className="rounded-[var(--radius-lg)] bg-white p-7 shadow-lift md:p-10">
-            <EnquiryForm
-              type="room"
-              submitLabel="Send availability enquiry"
-              fields={[
-                { name: "checkIn", label: "Check-in date", type: "date", required: true, half: true },
-                { name: "checkOut", label: "Check-out date", type: "date", required: true, half: true },
-                { name: "room", label: "Preferred room", type: "select", half: true, options: ["Any room", ...rooms.map((r) => r.name)] },
-                { name: "adults", label: "Adults", type: "number", min: 1, max: 12, required: true, half: true },
-                { name: "dogs", label: "Bringing a dog?", type: "select", half: true, options: ["No", "Yes — one dog", "Yes — two dogs"] },
-                { name: "requests", label: "Anything else we should know?", type: "textarea", placeholder: "Special occasion, dietary needs, late arrival…" },
-              ]}
-              note={
-                <Notice>
-                  This is an availability enquiry rather than an instant booking. We&rsquo;ll
-                  confirm availability and take your booking by email or phone — nothing is
-                  reserved until you hear from us.
-                </Notice>
-              }
-              successTitle="Thanks — we'll check the diary"
-              successBody="We'll email you shortly with availability and how to confirm your stay."
-            />
-          </div>
-        </div>
-      </Section>
+      <RoomEnquiry roomNames={rooms.map((r) => r.name)} />
     </>
+  );
+}
+
+/** Direct availability enquiry — pass roomNames to offer a room choice */
+function RoomEnquiry({ roomNames }: { roomNames?: string[] }) {
+  return (
+    <Section tone="cream" id="enquire" className="scroll-mt-20">
+      <div className="mx-auto max-w-3xl">
+        <SectionHead
+          eyebrow="Availability enquiry"
+          title="Check availability"
+          lede="Tell us when you'd like to come and which room you have in mind. We'll reply with availability and how to confirm your booking — usually within a few hours."
+          center
+        />
+        <div className="rounded-[var(--radius-lg)] bg-white p-7 shadow-lift md:p-10">
+          <EnquiryForm
+            type="room"
+            submitLabel="Send availability enquiry"
+            fields={[
+              { name: "checkIn", label: "Check-in date", type: "date", required: true, half: true },
+              { name: "checkOut", label: "Check-out date", type: "date", required: true, half: true },
+              ...(roomNames
+                ? [{ name: "room", label: "Preferred room", type: "select" as const, half: true, options: ["Any room", ...roomNames] }]
+                : []),
+              { name: "adults", label: "Adults", type: "number", min: 1, max: 12, required: true, half: true },
+              { name: "dogs", label: "Bringing a dog?", type: "select", half: true, options: ["No", "Yes — one dog", "Yes — two dogs"] },
+              { name: "requests", label: "Anything else we should know?", type: "textarea", placeholder: "Special occasion, dietary needs, late arrival…" },
+            ]}
+            note={
+              <Notice>
+                This is an availability enquiry rather than an instant booking. We&rsquo;ll
+                confirm availability and take your booking by email or phone — nothing is
+                reserved until you hear from us.
+              </Notice>
+            }
+            successTitle="Thanks — we'll check the diary"
+            successBody="We'll email you shortly with availability and how to confirm your stay."
+          />
+        </div>
+      </div>
+    </Section>
   );
 }

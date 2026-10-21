@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { site } from "@/data/site";
-import { getPosts } from "@/lib/blog";
+import { getPosts, hasBlog } from "@/lib/blog";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const pages: { path: string; priority: number; freq: MetadataRoute.Sitemap[number]["changeFrequency"] }[] = [
@@ -16,7 +16,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/faq", priority: 0.5, freq: "monthly" },
     { path: "/contact", priority: 0.8, freq: "monthly" },
     { path: "/careers", priority: 0.5, freq: "monthly" },
-    { path: "/blog", priority: 0.6, freq: "weekly" },
   ];
 
   return [
@@ -26,6 +25,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: p.freq,
       priority: p.priority,
     })),
+    ...(hasBlog() ? [{ url: `${site.url}/blog`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.6 }] : []),
     ...getPosts().map((post) => ({
       url: `${site.url}/blog/${post.slug}`,
       lastModified: new Date(post.date),

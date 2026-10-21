@@ -12,12 +12,13 @@ import type { ImageKey } from "@/data/images";
  */
 export default function StoryVideo({ className = "" }: { className?: string }) {
   const [playing, setPlaying] = useState(false);
-  const { type, src, poster, title } = site.video;
+  const { type, src, poster, title, portrait } = site.video;
   const hasVideo = Boolean(src);
+  const shape = portrait ? "mx-auto aspect-[9/16] max-w-sm" : "aspect-video";
 
   return (
     <div
-      className={`relative aspect-video overflow-hidden rounded-[var(--radius-lg)] bg-ink shadow-lift ${className}`}
+      className={`relative ${shape} overflow-hidden rounded-[var(--radius-lg)] bg-ink shadow-lift ${className}`}
     >
       {playing && hasVideo ? (
         type === "mp4" ? (
@@ -44,7 +45,10 @@ export default function StoryVideo({ className = "" }: { className?: string }) {
         )
       ) : (
         <>
-          <Photo id={poster as ImageKey} sizes="(max-width: 1180px) 100vw, 1180px" />
+          <Photo
+            id={poster as ImageKey}
+            sizes={portrait ? "384px" : "(max-width: 1180px) 100vw, 1180px"}
+          />
           <div className="absolute inset-0 bg-black/35" />
           <button
             type="button"

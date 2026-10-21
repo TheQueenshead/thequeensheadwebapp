@@ -38,7 +38,7 @@ export const menus: Menu[] = [
   {
     id: "lunch-dinner",
     label: "Lunch & Dinner",
-    served: "Tuesday – Saturday · Lunch 12–2.30pm · Dinner 6–9pm",
+    served: "Wednesday – Saturday · From 6pm",
     intro:
       "Proper pub food, cooked from scratch with produce from Essex and the surrounding counties. The menu changes with the seasons — this is a taste of what to expect.",
     sections: [

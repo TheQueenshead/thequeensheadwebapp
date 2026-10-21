@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import { PageHero, Photo, Section, SectionHead, Card, Notice } from "@/components/ui";
 import EnquiryForm from "@/components/forms/EnquiryForm";
 import { vacancies, perks } from "@/data/careers";
+import { site } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "Careers — Join the Team",
   description:
-    "Jobs at The Queen's Head, Littlebury. Current vacancies in the kitchen, front of house and housekeeping, and how to apply.",
+    "Jobs at The Queen's Head, Littlebury — current vacancies and how to get in touch about working with us.",
 };
 
 export default function CareersPage() {
@@ -64,17 +65,19 @@ export default function CareersPage() {
             <div className="relative mb-6 aspect-[4/5] overflow-hidden rounded-[var(--radius-lg)] shadow-lift">
               <Photo id="chef" sizes="(max-width: 1024px) 100vw, 35vw" />
             </div>
-            <Card>
-              <h3 className="text-xl">Why work here</h3>
-              <ul className="mt-3 space-y-2 text-sm text-body">
-                {perks.map((p) => (
-                  <li key={p} className="flex gap-2">
-                    <span className="text-gold-dark" aria-hidden="true">◆</span>
-                    {p}
-                  </li>
-                ))}
-              </ul>
-            </Card>
+            {perks.length > 0 && (
+              <Card>
+                <h3 className="text-xl">Why work here</h3>
+                <ul className="mt-3 space-y-2 text-sm text-body">
+                  {perks.map((p) => (
+                    <li key={p} className="flex gap-2">
+                      <span className="text-gold-dark" aria-hidden="true">◆</span>
+                      {p}
+                    </li>
+                  ))}
+                </ul>
+              </Card>
+            )}
           </aside>
         </div>
       </Section>
@@ -92,7 +95,9 @@ export default function CareersPage() {
               type="careers"
               submitLabel="Send application"
               fields={[
-                { name: "role", label: "Role you're interested in", type: "select", required: true, options: [...vacancies.map((v) => v.title), "General enquiry / anything suitable"] },
+                { name: "role", label: "Role you're interested in", type: "select", required: true, options: vacancies.length
+                  ? [...vacancies.map((v) => v.title), "General enquiry / anything suitable"]
+                  : ["Kitchen", "Front of house & bar", "Housekeeping", "Anything suitable"] },
                 { name: "availability", label: "When could you start?", half: true, placeholder: "e.g. two weeks' notice" },
                 { name: "cvLink", label: "Link to CV or LinkedIn (optional)", type: "url", half: true, placeholder: "https://" },
                 { name: "experience", label: "A bit about you and your experience", type: "textarea", required: true },
@@ -101,7 +106,7 @@ export default function CareersPage() {
                 <Notice>
                   Your details are only used to consider you for a role at The Queen&rsquo;s
                   Head and are kept for no more than six months. You can also email a CV to
-                  us directly.
+                  us at <a href={`mailto:${site.email}`}>{site.email}</a>.
                 </Notice>
               }
               successTitle="Application received"

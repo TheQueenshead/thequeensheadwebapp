@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import type { EnquiryType } from "@/lib/enquiries";
+import Turnstile, { turnstileSiteKey } from "./Turnstile";
 
 export type FieldDef = {
   name: string;
@@ -41,9 +42,16 @@ export default function EnquiryForm({
 }: Props) {
   const [status, setStatus] = useState<"idle" | "sending" | "done" | "error">("idle");
   const [error, setError] = useState<string | null>(null);
+  const [captcha, setCaptcha] = useState("");
+  const [captchaKey, setCaptchaKey] = useState(0);
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (turnstileSiteKey && !captcha) {
+      setStatus("error");
+      setError("The security check is still running — please try again in a moment. If this keeps happening, give us a call.");
+      return;
+    }
     setStatus("sending");
     setError(null);
 
@@ -61,6 +69,7 @@ export default function EnquiryForm({
       email: String(data.get("email") ?? ""),
       phone: String(data.get("phone") ?? ""),
       website: String(data.get("website") ?? ""),
+      captcha: captcha || undefined,
       fields: extra,
     };
 
@@ -77,6 +86,8 @@ export default function EnquiryForm({
     } catch (err) {
       setStatus("error");
       setError(err instanceof Error ? err.message : "Something went wrong");
+      // Tokens are single-use, so fetch a fresh one for the retry
+      setCaptchaKey((k) => k + 1);
     }
   }
 
@@ -117,6 +128,8 @@ export default function EnquiryForm({
         <label htmlFor={`${type}-website`}>Leave this field empty</label>
         <input id={`${type}-website`} name="website" type="text" tabIndex={-1} autoComplete="off" />
       </div>
+
+      <Turnstile onToken={setCaptcha} resetKey={captchaKey} />
 
       {note && <div className="rounded-[var(--radius-sm)] border-l-4 border-wine bg-cream px-4 py-3 text-sm text-body">{note}</div>}
 

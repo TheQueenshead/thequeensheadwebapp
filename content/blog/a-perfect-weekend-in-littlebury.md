@@ -1,4 +1,5 @@
 ---
+draft: true # hidden until the content is checked — delete this line to publish
 title: "A perfect weekend in Littlebury and Saffron Walden"
 date: "2026-08-14"
 excerpt: "Two days, one small village, and more to see than you'd think. Our guide to making the most of a weekend stay at the Queen's Head."

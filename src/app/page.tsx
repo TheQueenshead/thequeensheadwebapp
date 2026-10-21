@@ -5,6 +5,7 @@ import HeroVideo from "@/components/HeroVideo";
 import Reviews from "@/components/Reviews";
 import MapEmbed from "@/components/MapEmbed";
 import NewsletterForm from "@/components/forms/NewsletterForm";
+import BookingComLink from "@/components/BookingComLink";
 import { site } from "@/data/site";
 import { rooms } from "@/data/rooms";
 import { events } from "@/data/events";
@@ -29,7 +30,7 @@ export default function HomePage() {
             A 14th-century inn with a very warm welcome
           </h1>
           <p className="mt-6 max-w-[54ch] text-lg text-white/85 md:text-xl">
-            Seasonal food, local ales and six cosy bedrooms, a mile from Audley End
+            Good food, good drink and six cosy bedrooms, a mile from Audley End
             and a world away from the everyday.
           </p>
           <div className="mt-9 flex flex-wrap gap-3">
@@ -52,7 +53,7 @@ export default function HomePage() {
           <div className="reveal">
             <p className="eyebrow mb-3">Welcome</p>
             <h2 className="gold-rule text-3xl md:text-[2.75rem]">
-              The living room of the village, since 1340
+              The living room of the village, for centuries
             </h2>
             <p className="mt-6 text-lg text-body">
               The Queen&rsquo;s Head has been feeding and watering travellers on the
@@ -62,9 +63,8 @@ export default function HomePage() {
               upstairs.
             </p>
             <p className="mt-4 text-body">
-              Everything we cook is made from scratch with produce from Essex and the
-              counties next door. Everything we pour, we&rsquo;ve tasted first. And
-              everyone who walks in gets the same welcome — whether it&rsquo;s your
+              Good food, a well-kept bar and the same warm welcome for everyone who
+              walks in — whether it&rsquo;s your
               first visit or your five-hundredth.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
@@ -108,7 +108,7 @@ export default function HomePage() {
         <SectionHead
           eyebrow="Our story on film"
           title="Come and see for yourself"
-          lede="A few minutes behind the bar, in the kitchen and around the village — the Queen's Head as our regulars know it."
+          lede="45 seconds behind the bar, in the kitchen and around the village — the Queen's Head as our regulars know it."
           center
           light
         />
@@ -126,31 +126,54 @@ export default function HomePage() {
             lede="Oak beams, deep mattresses, proper breakfasts. Each room is different; all of them are quiet."
           />
           <Link href="/rooms" className="btn btn-outline mb-12 shrink-0">
-            All rooms & rates
+            {site.comingSoon.rooms ? "Rooms & availability" : "All rooms & rates"}
           </Link>
         </div>
-        <div className="reveal-stagger grid gap-6 md:grid-cols-3">
-          {featuredRooms.map((r) => (
-            <Link
-              key={r.slug}
-              href={`/rooms#${r.slug}`}
-              className="group lift overflow-hidden rounded-[var(--radius-md)] bg-white shadow-soft no-underline hover:no-underline"
-            >
-              <div className="relative aspect-[4/3] overflow-hidden">
-                <Photo id={r.images[0]} className="transition-transform duration-700 group-hover:scale-105" sizes="(max-width: 768px) 100vw, 33vw" />
+        {site.comingSoon.rooms ? (
+          <div className="reveal grid items-center gap-8 overflow-hidden rounded-[var(--radius-lg)] bg-white shadow-soft md:grid-cols-2">
+            <div className="relative aspect-[4/3] h-full min-h-[260px]">
+              <Photo id="roomOne" sizes="(max-width: 768px) 100vw, 50vw" />
+            </div>
+            <div className="p-7 md:pr-10">
+              <p className="eyebrow mb-2">Room pages coming soon</p>
+              <h3 className="text-2xl md:text-3xl">See our rooms and book your stay</h3>
+              <p className="mt-3 text-muted">
+                {site.bookingComUrl
+                  ? "Photos, rates and live availability for every room are on our Booking.com page — or send us an enquiry and book direct."
+                  : "Send us an enquiry with your dates and we'll come straight back to you with availability and rates."}
+              </p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <BookingComLink className="btn btn-primary" />
+                <Link href="/rooms#enquire" className="btn btn-outline">
+                  Enquire direct
+                </Link>
               </div>
-              <div className="p-6">
-                <div className="flex items-baseline justify-between gap-3">
-                  <h3 className="text-2xl">{r.name}</h3>
-                  <p className="shrink-0 font-display text-wine">
-                    from <strong>£{r.from}</strong>
-                  </p>
+            </div>
+          </div>
+        ) : (
+          <div className="reveal-stagger grid gap-6 md:grid-cols-3">
+            {featuredRooms.map((r) => (
+              <Link
+                key={r.slug}
+                href={`/rooms#${r.slug}`}
+                className="group lift overflow-hidden rounded-[var(--radius-md)] bg-white shadow-soft no-underline hover:no-underline"
+              >
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  <Photo id={r.images[0]} className="transition-transform duration-700 group-hover:scale-105" sizes="(max-width: 768px) 100vw, 33vw" />
                 </div>
-                <p className="mt-1 text-sm text-muted">{r.short}</p>
-              </div>
-            </Link>
-          ))}
-        </div>
+                <div className="p-6">
+                  <div className="flex items-baseline justify-between gap-3">
+                    <h3 className="text-2xl">{r.name}</h3>
+                    <p className="shrink-0 font-display text-wine">
+                      from <strong>£{r.from}</strong>
+                    </p>
+                  </div>
+                  <p className="mt-1 text-sm text-muted">{r.short}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        )}
       </Section>
 
       {/* ---------- EVENTS ---------- */}
@@ -159,44 +182,56 @@ export default function HomePage() {
           <div>
             <SectionHead
               eyebrow="What's on"
-              title="Always something happening"
-              lede="Quiz nights, live music, supper clubs and the odd oompah band. Sign up and we'll let you know first."
+              title="Events at the pub"
+              lede="Sign up and we'll let you know first when something's on."
             />
             <NewsletterForm />
           </div>
-          <ul className="reveal-stagger space-y-4">
-            {nextEvents.map((e) => {
-              const d = eventDateParts(e.date);
-              return (
-                <li key={e.slug}>
-                  <Link
-                    href={`/events#${e.slug}`}
-                    className="grid grid-cols-[72px_1fr] items-center gap-5 rounded-[var(--radius-md)] border border-black/5 bg-cream p-5 no-underline transition-shadow hover:shadow-lift hover:no-underline"
-                  >
-                    <time
-                      dateTime={e.date}
-                      className="grid place-items-center rounded-[var(--radius-sm)] bg-wine py-2 text-center font-display text-white"
+          {nextEvents.length === 0 ? (
+            <div className="reveal grid place-items-center rounded-[var(--radius-md)] border border-black/5 bg-cream p-10 text-center">
+              <div>
+                <p className="font-display text-2xl text-ink">Nothing in the diary just yet</p>
+                <p className="mx-auto mt-2 max-w-[40ch] text-muted">
+                  New events are on their way — join the newsletter and you&rsquo;ll be the
+                  first to hear.
+                </p>
+              </div>
+            </div>
+          ) : (
+            <ul className="reveal-stagger space-y-4">
+              {nextEvents.map((e) => {
+                const d = eventDateParts(e.date);
+                return (
+                  <li key={e.slug}>
+                    <Link
+                      href={`/events#${e.slug}`}
+                      className="grid grid-cols-[72px_1fr] items-center gap-5 rounded-[var(--radius-md)] border border-black/5 bg-cream p-5 no-underline transition-shadow hover:shadow-lift hover:no-underline"
                     >
-                      <span className="text-2xl font-bold leading-none">{d.day}</span>
-                      <span className="text-[0.7rem] uppercase tracking-widest">{d.mon}</span>
-                    </time>
-                    <div>
-                      <h3 className="text-xl">{e.title}</h3>
-                      <p className="text-sm text-muted">
-                        {d.weekday} · {e.time}
-                        {e.price ? ` · ${e.price}` : ""}
-                      </p>
-                    </div>
-                  </Link>
-                </li>
-              );
-            })}
-            <li>
-              <Link href="/events" className="btn btn-primary">
-                Full events calendar
-              </Link>
-            </li>
-          </ul>
+                      <time
+                        dateTime={e.date}
+                        className="grid place-items-center rounded-[var(--radius-sm)] bg-wine py-2 text-center font-display text-white"
+                      >
+                        <span className="text-2xl font-bold leading-none">{d.day}</span>
+                        <span className="text-[0.7rem] uppercase tracking-widest">{d.mon}</span>
+                      </time>
+                      <div>
+                        <h3 className="text-xl">{e.title}</h3>
+                        <p className="text-sm text-muted">
+                          {d.weekday} · {e.time}
+                          {e.price ? ` · ${e.price}` : ""}
+                        </p>
+                      </div>
+                    </Link>
+                  </li>
+                );
+              })}
+              <li>
+                <Link href="/events" className="btn btn-primary">
+                  Full events calendar
+                </Link>
+              </li>
+            </ul>
+          )}
         </div>
       </Section>
 
@@ -209,7 +244,7 @@ export default function HomePage() {
             <SectionHead
               eyebrow="Find us"
               title="Just off the road to Cambridge"
-              lede="Two miles north of Saffron Walden, a mile from Audley End House, and twenty minutes on foot from Audley End station."
+              lede="A mile and a half north-west of Saffron Walden, a mile from Audley End House, and about two miles from Audley End station."
             />
             <address className="not-italic leading-relaxed">
               <strong className="text-ink">{site.legalName}</strong>

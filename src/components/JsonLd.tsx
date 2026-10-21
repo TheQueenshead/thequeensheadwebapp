@@ -6,7 +6,8 @@ export default function JsonLd() {
     Monday: "Mo", Tuesday: "Tu", Wednesday: "We", Thursday: "Th", Friday: "Fr", Saturday: "Sa", Sunday: "Su",
   };
   const openingHours = site.hours
-    .filter((h) => h.open !== "Closed")
+    // Only days with real clock times (e.g. "18:00"–"23:00") go to Google.
+    .filter((h) => /^\d\d:\d\d$/.test(h.open) && /^\d\d:\d\d$/.test(h.close))
     .map((h) => `${dayMap[h.day]} ${h.open}-${h.close}`);
 
   const data = {
@@ -15,7 +16,7 @@ export default function JsonLd() {
     name: site.legalName,
     description: site.description,
     url: site.url,
-    telephone: site.phone,
+    ...(site.phone ? { telephone: site.phone } : {}),
     email: site.email,
     servesCuisine: "British",
     priceRange: "££",
@@ -28,7 +29,7 @@ export default function JsonLd() {
       addressCountry: "GB",
     },
     openingHours,
-    sameAs: Object.values(site.social),
+    sameAs: Object.values(site.social).filter(Boolean),
     acceptsReservations: "True",
     amenityFeature: [
       { "@type": "LocationFeatureSpecification", name: "Dog friendly", value: true },

@@ -11,6 +11,10 @@ function Stars({ n }: { n: number }) {
 }
 
 export default function Reviews() {
+  // Nothing to show until real reviews are added in src/data/site.ts
+  if (site.reviews.length === 0) return null;
+  const rating = site.googleRating;
+
   return (
     <Section tone="white">
       <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
@@ -19,20 +23,22 @@ export default function Reviews() {
           title="What our guests say"
           lede="We're proud of our reviews — and prouder still of the regulars who keep coming back."
         />
-        <a
-          href={site.map.reviewsUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mb-12 inline-flex items-center gap-3 rounded-full border border-black/10 bg-cream px-5 py-3 text-sm font-semibold shadow-soft hover:border-wine"
-        >
-          <span className="grid h-8 w-8 place-items-center rounded-full bg-white font-display text-lg font-bold text-wine">
-            G
-          </span>
-          <span>
-            {site.googleRating.score} ★ on Google · {site.googleRating.count} reviews
-          </span>
-          <span aria-hidden="true">→</span>
-        </a>
+        {rating && (
+          <a
+            href={site.map.reviewsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mb-12 inline-flex items-center gap-3 rounded-full border border-black/10 bg-cream px-5 py-3 text-sm font-semibold shadow-soft hover:border-wine"
+          >
+            <span className="grid h-8 w-8 place-items-center rounded-full bg-white font-display text-lg font-bold text-wine">
+              G
+            </span>
+            <span>
+              {rating.score} ★ on Google · {rating.count} reviews
+            </span>
+            <span aria-hidden="true">→</span>
+          </a>
+        )}
       </div>
 
       <ul className="reveal-stagger grid gap-6 md:grid-cols-3">

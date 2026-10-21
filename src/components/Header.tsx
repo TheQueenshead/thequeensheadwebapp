@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import Logo from "./Logo";
 import { mainNav } from "@/data/nav";
 
-export default function Header() {
+export default function Header({ showBlog = true }: { showBlog?: boolean }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
@@ -33,6 +33,8 @@ export default function Header() {
     };
   }, [open]);
 
+  const nav = mainNav.filter((item) => showBlog || item.href !== "/blog");
+
   const isActive = (href: string) =>
     pathname === href || pathname.startsWith(href + "/");
 
@@ -43,13 +45,15 @@ export default function Header() {
       }`}
     >
       <nav
-        className="container-site flex items-center justify-between gap-4 py-3"
+        className="container-site flex items-center justify-between gap-2 py-3 sm:gap-4"
         aria-label="Main"
       >
         <Logo />
 
-        <ul className="hidden items-center gap-5 whitespace-nowrap lg:flex xl:gap-6">
-          {mainNav.map((item) => (
+        {/* Full nav only from xl (1280px) — below that the logo, eight links and
+            both buttons don't fit on one line, so the menu button is used */}
+        <ul className="hidden items-center gap-5 whitespace-nowrap xl:flex">
+          {nav.map((item) => (
             <li key={item.href}>
               <Link
                 href={item.href}
@@ -71,11 +75,13 @@ export default function Header() {
             Stay
           </Link>
           <Link href="/book" className="btn btn-primary btn-sm whitespace-nowrap">
-            Book a Table
+            {/* Short label on phones so the header fits a 320px screen */}
+            <span className="sm:hidden" aria-hidden="true">Book</span>
+            <span className="sr-only sm:not-sr-only">Book a Table</span>
           </Link>
           <button
             type="button"
-            className="ml-1 inline-flex h-10 w-10 flex-col items-center justify-center gap-[5px] rounded-lg border-2 border-ink lg:hidden"
+            className="inline-flex h-10 w-10 shrink-0 flex-col items-center justify-center gap-[5px] rounded-lg border-2 border-ink xl:hidden"
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? "Close menu" : "Open menu"}
@@ -100,10 +106,10 @@ export default function Header() {
       <div
         id="mobile-menu"
         hidden={!open}
-        className="absolute inset-x-0 top-full h-[calc(100vh-100%)] overflow-y-auto border-t border-black/10 bg-cream lg:hidden"
+        className="absolute inset-x-0 top-full h-[calc(100vh-100%)] overflow-y-auto border-t border-black/10 bg-cream xl:hidden"
       >
         <ul className="container-site flex flex-col gap-1 py-6">
-          {[{ href: "/", label: "Home" }, ...mainNav, { href: "/faq", label: "FAQ" }, { href: "/gift-cards", label: "Gift Cards" }, { href: "/careers", label: "Careers" }].map(
+          {[{ href: "/", label: "Home" }, ...nav, { href: "/faq", label: "FAQ" }, { href: "/gift-cards", label: "Gift Cards" }, { href: "/careers", label: "Careers" }].map(
             (item) => (
               <li key={item.href}>
                 <Link

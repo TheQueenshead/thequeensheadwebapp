@@ -6,25 +6,19 @@ import { attractions, walks } from "@/data/local";
 export const metadata: Metadata = {
   title: "About & Local Area",
   description:
-    "The story of The Queen's Head, a 14th-century inn in Littlebury, plus our guide to Audley End, Saffron Walden and the best walks from the front door.",
+    "The Queen's Head is a Grade II listed village inn in Littlebury, a mile from Audley End House. Things to do nearby, from Saffron Walden to IWM Duxford, and walks from the village.",
 };
 
-const timeline = [
-  { year: "c.1340", text: "Built as a timber-framed hall house, open to the rafters with a central hearth." },
-  { year: "1500s", text: "Chimney and first floor added; the building becomes an inn for the first time." },
-  { year: "1700s", text: "A busy coaching inn on the London–Cambridge road, with stabling for twenty horses." },
-  { year: "1800s", text: "Doubles as the manorial court. The coach arch and Coach House survive from this era." },
-  { year: "1940s", text: "Billets airmen from RAF Debden during the Second World War." },
-  { year: "Today", text: "Lovingly restored, with six bedrooms, a kitchen cooking from scratch and the same warm welcome." },
-];
+/** Historic England's official record of the building */
+const LISTING_URL = "https://historicengland.org.uk/listing/the-list/list-entry/1278172";
 
 export default function AboutPage() {
   return (
     <>
       <PageHero
         eyebrow="Our story"
-        title="Seven centuries of hospitality"
-        lede="The Queen's Head has stood on Littlebury's High Street since the reign of Edward III. We're only its latest custodians — and we take that seriously."
+        title="A listed inn on the village High Street"
+        lede="The Queen's Head is a timber-framed, Grade II listed inn in the heart of Littlebury — a mile from Audley End House and a mile and a half from Saffron Walden."
         image="exteriorDay"
       />
 
@@ -34,52 +28,49 @@ export default function AboutPage() {
             <Photo id="fireplace" sizes="(max-width: 1024px) 100vw, 50vw" />
           </div>
           <div>
-            <SectionHead
-              eyebrow="What makes us different"
-              title="A village pub that happens to have a very good kitchen"
-            />
+            <SectionHead eyebrow="Who we are" title="The village pub, with rooms upstairs" />
             <p className="text-lg">
               We believe a pub should be the living room of its village — somewhere for a
-              pint after work, a long Sunday lunch with the family, a quiet dinner for two
-              by the fire, or a bed for the night after a day&rsquo;s walking.
+              pint after work, a family celebration, a quiet dinner for two,
+              or a bed for the night after a day out at Audley End.
             </p>
             <p className="mt-4">
-              Our head chef cooks seasonal British food from scratch, working with farmers,
-              growers and brewers from Essex and the counties next door. Our bar pours
-              cask ales from Adnams and Woodforde&rsquo;s alongside a changing guest ale, and a
-              wine list we&rsquo;ve tasted our way through so you don&rsquo;t have to.
-            </p>
-            <p className="mt-4">
-              Upstairs — and across the courtyard — are six bedrooms, each different, all
-              quiet, all with a proper breakfast included.
+              Inside you&rsquo;ll find old beams and inglenook fireplaces, food and drink in
+              the bar and restaurant, and en-suite bedrooms upstairs for anyone who wants to
+              make a night of it.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/menu" className="btn btn-primary">
-                See the menu
+              <Link href="/book" className="btn btn-primary">
+                Book a table
               </Link>
               <Link href="/rooms" className="btn btn-outline">
-                Our rooms
+                Stay with us
               </Link>
             </div>
           </div>
         </div>
       </Section>
 
-      {/* Timeline */}
+      {/* The building — facts from the official listing */}
       <Section tone="ink">
-        <SectionHead eyebrow="History" title="A building with stories to tell" center light />
-        <ol className="reveal-stagger grid gap-6 md:grid-cols-3">
-          {timeline.map((t) => (
-            <li key={t.year} className="rounded-[var(--radius-md)] border border-white/10 bg-white/5 p-6">
-              <p className="font-display text-3xl text-gold">{t.year}</p>
-              <p className="mt-2 text-white/80">{t.text}</p>
+        <SectionHead eyebrow="The building" title="Part of Littlebury's history" center light />
+        <ul className="reveal-stagger grid gap-6 md:grid-cols-3">
+          {[
+            { k: "Grade II", v: "Listed as a building of special architectural and historic interest since 1967." },
+            { k: "Timber-framed", v: "A timber-framed and plastered building, with 18th-century features on the outside." },
+            { k: "Littlebury", v: "It stands on the village High Street (the B1383), a mile from Audley End House." },
+          ].map((f) => (
+            <li key={f.k} className="rounded-[var(--radius-md)] border border-white/10 bg-white/5 p-6">
+              <p className="font-display text-3xl text-gold">{f.k}</p>
+              <p className="mt-2 text-white/80">{f.v}</p>
             </li>
           ))}
-        </ol>
+        </ul>
         <p className="mt-10 text-center">
-          <Link href="/blog/history-of-the-queens-head" className="btn btn-outline-light">
-            Read the full history
-          </Link>
+          <a href={LISTING_URL} target="_blank" rel="noopener noreferrer" className="btn btn-outline-light">
+            Read the Historic England listing
+            <span className="sr-only"> (opens in a new tab)</span>
+          </a>
         </p>
       </Section>
 
@@ -88,31 +79,28 @@ export default function AboutPage() {
         <SectionHead
           eyebrow="The local area"
           title="Things to see and do nearby"
-          lede="We're in the middle of some of the loveliest countryside in the East of England, with a Jacobean palace at the end of the lane and a medieval market town up the road."
+          lede="Audley End is on our doorstep and Saffron Walden is just down the road, with Duxford, Thaxted and Cambridge all within easy reach."
         />
-        <div className="reveal-stagger grid gap-6 md:grid-cols-2">
+        <ul className="reveal-stagger grid gap-5 md:grid-cols-2">
           {attractions.map((a) => (
-            <article key={a.name} className="grid overflow-hidden rounded-[var(--radius-md)] bg-cream shadow-soft sm:grid-cols-[200px_1fr]">
-              <div className="relative aspect-[4/3] sm:aspect-auto">
-                <Photo id={a.image} sizes="(max-width: 640px) 100vw, 200px" />
+            <li key={a.name} className="flex flex-col rounded-[var(--radius-md)] bg-cream p-6 shadow-soft">
+              <div className="flex items-baseline justify-between gap-3">
+                <h3 className="text-xl">{a.name}</h3>
+                <span className="shrink-0 rounded-full border border-gold-dark bg-white px-3 py-1 text-xs font-semibold">
+                  {a.distance}
+                </span>
               </div>
-              <div className="p-6">
-                <div className="flex items-baseline justify-between gap-3">
-                  <h3 className="text-xl">{a.name}</h3>
-                  <span className="shrink-0 rounded-full border border-gold-dark bg-white px-3 py-1 text-xs font-semibold">
-                    {a.distance}
-                  </span>
-                </div>
-                <p className="mt-2 text-sm text-body">{a.desc}</p>
-                {a.url && (
-                  <a href={a.url} target="_blank" rel="noopener noreferrer" className="mt-3 inline-block text-sm font-semibold text-wine">
-                    Visit website →
-                  </a>
-                )}
-              </div>
-            </article>
+              <p className="mt-2 flex-1 text-sm text-body">{a.desc}</p>
+              <a href={a.url} target="_blank" rel="noopener noreferrer" className="mt-3 inline-block text-sm font-semibold text-wine">
+                Visit website →<span className="sr-only"> for {a.name} (opens in a new tab)</span>
+              </a>
+            </li>
           ))}
-        </div>
+        </ul>
+        <p className="mt-8 text-sm text-muted">
+          Distances are approximate, from the pub. Opening times change with the seasons, so
+          please check before you set off.
+        </p>
       </Section>
 
       {/* Walks */}
@@ -120,9 +108,9 @@ export default function AboutPage() {
         <div className="grid gap-12 lg:grid-cols-[1fr_1.3fr]">
           <div>
             <SectionHead
-              eyebrow="Walking routes"
-              title="Boots on, straight from the front door"
-              lede="Littlebury sits on the Harcamlow Way and a stone's throw from the Icknield Way. Ask at the bar for printed route cards, or for a packed lunch if you're going far."
+              eyebrow="Walking"
+              title="Walks around Littlebury"
+              lede="Rolling farmland, quiet lanes and the Icknield Way close by. Here are a few published routes to get you started."
             />
             <div className="relative aspect-[4/3] overflow-hidden rounded-[var(--radius-lg)] shadow-lift">
               <Photo id="walking" sizes="(max-width: 1024px) 100vw, 40vw" />
@@ -130,34 +118,28 @@ export default function AboutPage() {
           </div>
           <div className="reveal-stagger grid gap-5 sm:grid-cols-2">
             {walks.map((w) => (
-              <Card key={w.name}>
-                <span
-                  className={`tag ${
-                    w.difficulty === "Easy" ? "" : w.difficulty === "Moderate" ? "!bg-gold" : "!bg-wine !text-white"
-                  }`}
-                >
-                  {w.difficulty}
-                </span>
-                <h3 className="mt-3 text-xl">{w.name}</h3>
-                <p className="mt-1 text-sm font-semibold text-wine">
-                  {w.distance} · {w.time}
-                </p>
-                <p className="mt-3 text-sm text-body">{w.desc}</p>
+              <Card key={w.name} className="flex flex-col">
+                <h3 className="text-xl">{w.name}</h3>
+                {w.distance && <p className="mt-1 text-sm font-semibold text-wine">{w.distance}</p>}
+                <p className="mt-3 flex-1 text-sm text-body">{w.desc}</p>
+                <a href={w.url} target="_blank" rel="noopener noreferrer" className="mt-4 text-sm font-semibold text-wine">
+                  Route on {w.source} →<span className="sr-only"> (opens in a new tab)</span>
+                </a>
               </Card>
             ))}
           </div>
         </div>
         <p className="mt-10 text-sm text-muted">
-          Muddy boots and well-behaved dogs are welcome in the bar. Please check weather and
-          footpath conditions before setting out.
+          Please check the weather and footpath conditions before setting out, and follow the
+          Countryside Code.
         </p>
       </Section>
 
       <CTABand
-        title="Make a weekend of it"
-        text="Stay the night and you'll have Audley End, Saffron Walden and thirty miles of footpaths on the doorstep."
-        primary={{ href: "/rooms", label: "See our rooms" }}
-        secondary={{ href: "/blog/a-perfect-weekend-in-littlebury", label: "Weekend guide" }}
+        title="Make a day of it"
+        text="Explore Audley End and Saffron Walden, then come back to us for something to eat and drink."
+        primary={{ href: "/book", label: "Book a table" }}
+        secondary={{ href: "/rooms", label: "Stay the night" }}
       />
     </>
   );

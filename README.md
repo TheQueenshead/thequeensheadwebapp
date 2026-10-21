@@ -25,7 +25,7 @@ npm run dev                    # http://localhost:3000
 | Private dining spaces, capacities, set menus | `src/data/spaces.ts` |
 | Job vacancies and perks | `src/data/careers.ts` |
 | Local attractions and walking routes | `src/data/local.ts` |
-| Which photos appear in the gallery | `src/data/gallery.ts` |
+| Which photos appear in the gallery | Instagram, via `BEHOLD_FEED_URL` (see below); `src/data/gallery.ts` is the fallback |
 | **Every photo on the site** (swap-out list) | `src/data/images.ts` |
 | Blog posts | `content/blog/*.md` — one Markdown file per post |
 | Navigation links | `src/data/nav.ts` |
@@ -47,6 +47,21 @@ All photos are currently royalty-free Unsplash images referenced in
 
 Set `NEXT_PUBLIC_IMAGE_SOURCE=local` in `.env.local` to see plain colour
 placeholders instead (handy offline or to check layout).
+
+## Gallery from Instagram
+
+The gallery page shows the pub's latest Instagram posts through
+[Behold](https://behold.so), which keeps the Instagram connection alive so
+nobody has to renew tokens.
+
+1. The pub signs up at behold.so (free plan is fine) and connects the
+   Instagram account.
+2. **New feed → JSON feed**, then copy the feed URL (`https://feeds.behold.so/…`).
+3. Set `BEHOLD_FEED_URL` in Vercel and redeploy.
+
+New posts appear within the hour. Until the feed is set — or if Behold is
+ever unreachable — the gallery quietly falls back to the photos in
+`src/data/gallery.ts`. Code: `src/lib/instagram.ts`.
 
 ## Adding the video
 
@@ -77,25 +92,53 @@ contact) post to `/api/enquiry`. The newsletter posts to `/api/newsletter`.
 
 - Each enquiry emails the pub (`ENQUIRY_TO_EMAIL`) with reply-to set to the
   customer, and sends the customer a branded acknowledgement.
-- Spam protection: a hidden honeypot field plus server-side validation (Zod).
+- The customer's acknowledgement deliberately repeats nothing they typed except
+  their first name, so the form can't be used to send spam from the pub's domain.
+- Spam protection (`src/lib/guard.ts`): a hidden honeypot field, server-side
+  validation (Zod, unknown fields rejected), Cloudflare Turnstile, and a limit
+  of 5 submissions per visitor per 10 minutes. That limit is kept in memory per
+  server instance, so for a hard cap also add a rate-limit rule in
+  **Vercel → Firewall** for `/api/enquiry` and `/api/newsletter`.
 - **Without `RESEND_API_KEY` the site runs in demo mode** — visitors see the
   success message, the submission is logged to the server console, nothing is
-  emailed. Good for the client review; switch on before go-live.
+  emailed. Good for local work and Vercel Preview deployments.
+- **Demo mode never runs on the live site.** On Vercel Production (or any
+  production build outside Vercel) a missing setting or a failed send shows the
+  visitor an error asking them to call, and logs `Enquiry send failed` —
+  so a misconfiguration can't silently swallow bookings.
 
 To go live: create a Resend account, verify the pub's domain (add the DNS records
-Resend gives you), create an API key, and set the four variables in Vercel. For
-the newsletter, create an Audience in Resend and set `RESEND_AUDIENCE_ID`.
+Resend gives you), create an API key, and set `RESEND_API_KEY`,
+`ENQUIRY_TO_EMAIL`, `ENQUIRY_FROM_EMAIL` and `RESEND_AUDIENCE_ID` (Resend →
+Audiences) in Vercel. Then create a Turnstile widget in Cloudflare for the
+pub's domain and set `NEXT_PUBLIC_TURNSTILE_SITE_KEY` and
+`TURNSTILE_SECRET_KEY`. Redeploy after changing `NEXT_PUBLIC_` values — they
+are baked in at build time.
 
 Field definitions and email subject lines live in `src/lib/enquiries.ts`; the
 email templates in `src/lib/email.ts`.
 
 ## Deploying to Vercel
 
-1. Push this folder to a Git repository (GitHub is simplest).
-2. In Vercel: **Add New Project → Import** the repo. Framework is auto-detected.
-3. Add the environment variables from `.env.example`.
-4. Deploy. Then **Settings → Domains** to attach the pub's domain and follow
-   the DNS instructions.
+Deploys run from GitHub Actions (`.github/workflows/deploy.yml`), not Vercel's
+own Git integration (turned off in `vercel.json` so nothing deploys twice):
+
+- **Pull request → Preview** deployment, linked in a PR comment.
+- **Push to `main` → Production.**
+- Lint and build must pass first, so a broken build never ships.
+
+One-time setup:
+
+1. Run `vercel link` in this folder to create/link the Vercel project. It
+   writes `.vercel/project.json` (git-ignored) containing `orgId` and
+   `projectId`.
+2. Create a token at vercel.com/account/tokens.
+3. In GitHub → **Settings → Secrets and variables → Actions**, add
+   `VERCEL_TOKEN`, `VERCEL_ORG_ID` and `VERCEL_PROJECT_ID`.
+4. In Vercel → Project → Settings → Environment Variables, add the values from
+   `.env.example` (CI pulls them from Vercel at build time).
+5. Push to `main`. Then **Settings → Domains** to attach the pub's domain and
+   follow the DNS instructions.
 
 Home and Events pages re-render once a day so past events drop off
 automatically. Everything else is static and very fast.
@@ -108,10 +151,13 @@ automatically. Everything else is static and very fast.
 - [ ] Real room names, descriptions and rates
 - [ ] Private dining capacities and set-menu prices
 - [ ] Replace stand-in photos; add the video
-- [ ] Real reviews (or remove the sample ones) and live Google rating
-- [ ] Vacancies — or set `vacancies = []` in `careers.ts`
+- [ ] Real reviews and live Google rating in `site.ts` (the section stays hidden until then)
+- [ ] Add real vacancies and perks in `careers.ts` if hiring (page shows "no vacancies" while empty)
+- [ ] Behold feed connected and `BEHOLD_FEED_URL` set, so the gallery shows the pub's Instagram
 - [ ] Client to review `privacy` and `accessibility` pages
-- [ ] Resend domain verified, env vars set, send a test enquiry
+- [ ] Resend domain verified, Turnstile keys created, all env vars set in Vercel Production
+- [ ] Send a test enquiry and newsletter sign-up on the live domain
+- [ ] Add a Vercel Firewall rate-limit rule for `/api/*`
 - [ ] Add a favicon (`src/app/favicon.ico`) from the client's logo
 - [ ] Submit `https://<domain>/sitemap.xml` in Google Search Console
 

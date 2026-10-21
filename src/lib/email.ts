@@ -1,5 +1,6 @@
 import { Resend } from "resend";
 import { site } from "@/data/site";
+import { ConfigError, isLive } from "./guard";
 import {
   enquiryTypes,
   fieldLabels,
@@ -19,6 +20,10 @@ import {
  * Without RESEND_API_KEY the site runs in "demo mode": submissions are
  * logged to the server console and the visitor still sees a success
  * message, so the design can be reviewed before go-live.
+ *
+ * Demo mode is never allowed on the live site (see isLive in guard.ts):
+ * there a missing setting or a failed send returns an error to the
+ * visitor instead, so no booking is ever silently lost.
  */
 
 const apiKey = process.env.RESEND_API_KEY;
@@ -35,6 +40,18 @@ const escape = (s: string) =>
   s.replace(/[&<>"']/g, (c) =>
     ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!,
   );
+
+/** Refuse to run the live site on stand-in email settings. */
+function requireLiveConfig(names: string[]) {
+  const missing = names.filter((n) => !process.env[n]);
+  if (missing.length) throw new ConfigError(`Missing env: ${missing.join(", ")}`);
+}
+
+/** Resend returns errors rather than throwing — turn them into exceptions. */
+async function send(email: Parameters<Resend["emails"]["send"]>[0]) {
+  const { error } = await resend!.emails.send(email);
+  if (error) throw new Error(`Resend: ${error.name} — ${error.message}`);
+}
 
 function rows(payload: EnquiryPayload) {
   const base: [string, string][] = [
@@ -64,7 +81,7 @@ function wrap(title: string, body: string) {
   <div style="max-width:600px;margin:0 auto;background:#fff;border-radius:14px;overflow:hidden">
     <div style="background:#8E1616;color:#E8C999;padding:22px 28px;font-family:Georgia,serif;font-size:22px">${escape(site.name)}<div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#E8C999;opacity:.85;margin-top:4px">Littlebury · Est. 14th Century</div></div>
     <div style="padding:28px"><h2 style="margin:0 0 14px;font-family:Georgia,serif;color:#000">${escape(title)}</h2>${body}</div>
-    <div style="padding:16px 28px;background:#F8EEDF;font-size:12px;color:#6b5f57">${escape(site.legalName)} · ${escape(site.address.line1)}, ${escape(site.address.town)} ${escape(site.address.postcode)} · ${escape(site.phone)}</div>
+    <div style="padding:16px 28px;background:#F8EEDF;font-size:12px;color:#6b5f57">${escape(site.legalName)} · ${escape(site.address.line1)}, ${escape(site.address.town)} ${escape(site.address.postcode)}${site.phone ? ` · ${escape(site.phone)}` : ""}</div>
   </div></body></html>`;
 }
 
@@ -72,6 +89,9 @@ export async function sendEnquiry(payload: EnquiryPayload) {
   const meta = enquiryTypes[payload.type];
   const subject = meta.subject({ ...payload.fields, name: payload.name });
 
+  if (isLive()) {
+    requireLiveConfig(["RESEND_API_KEY", "ENQUIRY_TO_EMAIL", "ENQUIRY_FROM_EMAIL"]);
+  }
   if (!resend) {
     console.info("[demo mode] Enquiry received (not emailed):", {
       subject,
@@ -81,7 +101,7 @@ export async function sendEnquiry(payload: EnquiryPayload) {
   }
 
   // 1. Notify the pub
-  await resend.emails.send({
+  await send({
     from: FROM,
     to: TO,
     replyTo: payload.email,
@@ -92,17 +112,20 @@ export async function sendEnquiry(payload: EnquiryPayload) {
     ),
   });
 
-  // 2. Acknowledge to the customer
-  await resend.emails.send({
+  // 2. Acknowledge to the customer. This goes to whatever address was
+  // typed in, so it deliberately repeats nothing the visitor wrote (bar
+  // their first name) — otherwise bots could use it to send their own
+  // text to strangers from the pub's domain.
+  await send({
     from: FROM,
     to: payload.email,
+    replyTo: TO,
     subject: `We've received your ${meta.label.toLowerCase()} — ${site.name}`,
     html: wrap(
-      `Thank you, ${payload.name.split(" ")[0]}`,
+      `Thank you, ${payload.name.split(" ")[0].slice(0, 30)}`,
       `<p>We've received your ${meta.label.toLowerCase()} and one of the team will be in touch shortly to confirm.</p>
        <p style="color:#6b5f57;font-size:13px"><strong>Please note:</strong> this is an enquiry, not a confirmed booking. Nothing is reserved until we've replied.</p>
-       <p style="margin-top:20px;font-size:13px;color:#6b5f57">Your details:</p>${table(payload)}
-       <p style="margin-top:20px">Need us sooner? Call <a href="${site.phoneHref}" style="color:#8E1616">${escape(site.phone)}</a>.</p>`,
+       ${site.phone ? `<p style="margin-top:20px">Need us sooner? Call <a href="${site.phoneHref}" style="color:#8E1616">${escape(site.phone)}</a>.</p>` : `<p style="margin-top:20px">Need us sooner? Just reply to this email.</p>`}`,
     ),
   });
 
@@ -111,17 +134,19 @@ export async function sendEnquiry(payload: EnquiryPayload) {
 
 export async function addNewsletterContact(email: string, name?: string) {
   const audienceId = process.env.RESEND_AUDIENCE_ID;
+  if (isLive()) requireLiveConfig(["RESEND_API_KEY", "RESEND_AUDIENCE_ID"]);
   if (!resend || !audienceId) {
     console.info("[demo mode] Newsletter sign-up (not stored):", { email, name });
     return { demo: true };
   }
   const [firstName, ...rest] = (name ?? "").trim().split(" ");
-  await resend.contacts.create({
+  const { error } = await resend.contacts.create({
     audienceId,
     email,
     firstName: firstName || undefined,
     lastName: rest.join(" ") || undefined,
     unsubscribed: false,
   });
+  if (error) throw new Error(`Resend: ${error.name} — ${error.message}`);
   return { demo: false };
 }

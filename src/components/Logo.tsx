@@ -15,11 +15,11 @@ export default function Logo({
     <Link
       href="/"
       aria-label="The Queen's Head, Littlebury — home"
-      className={`flex items-center gap-3 no-underline hover:no-underline ${className}`}
+      className={`flex items-center gap-2 no-underline sm:gap-3 hover:no-underline ${className}`}
     >
       <span
         aria-hidden="true"
-        className="grid h-11 w-11 shrink-0 place-items-center rounded-full border-2 border-gold bg-wine font-display text-lg font-semibold text-gold"
+        className="grid h-10 w-10 shrink-0 place-items-center rounded-full max-[359px]:hidden sm:h-11 sm:w-11 border-2 border-gold bg-wine font-display text-lg font-semibold text-gold"
       >
         Q
       </span>

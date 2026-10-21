@@ -24,9 +24,11 @@ export function SocialLinks({
     { key: "instagram", label: "Instagram", href: site.social.instagram },
     { key: "tripadvisor", label: "TripAdvisor", href: site.social.tripadvisor },
   ] as const;
+  const live = links.filter((l) => l.href);
+  if (!live.length) return null;
   return (
     <ul className={`flex gap-3 ${className}`} aria-label="Social media">
-      {links.map((l) => (
+      {live.map((l) => (
         <li key={l.key}>
           <a
             href={l.href}

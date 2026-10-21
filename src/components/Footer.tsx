@@ -5,7 +5,7 @@ import { site } from "@/data/site";
 import { footerNav } from "@/data/nav";
 import { SocialLinks } from "./SocialLinks";
 
-export default function Footer() {
+export default function Footer({ showBlog = true }: { showBlog?: boolean }) {
   const year = new Date().getFullYear();
   return (
     <footer className="bg-ink text-white/80">
@@ -13,8 +13,8 @@ export default function Footer() {
         <div>
           <Logo light />
           <p className="mt-5 max-w-[36ch] text-sm leading-relaxed text-white/65">
-            A restored 14th-century inn in the heart of Littlebury. Seasonal
-            food, local ales, six cosy bedrooms and a warm Essex welcome.
+            A restored 14th-century inn in the heart of Littlebury. Good food,
+            good drink, six cosy bedrooms and a warm Essex welcome.
           </p>
           <SocialLinks className="mt-6" />
         </div>
@@ -39,7 +39,7 @@ export default function Footer() {
             More
           </h2>
           <ul className="space-y-2.5 text-sm">
-            {footerNav.more.map((l) => (
+            {footerNav.more.filter((l) => showBlog || l.href !== "/blog").map((l) => (
               <li key={l.href}>
                 <Link href={l.href} className="text-white/80 hover:text-gold">
                   {l.label}
@@ -60,10 +60,14 @@ export default function Footer() {
             <br />
             {site.address.county} {site.address.postcode}
             <br />
-            <a href={site.phoneHref} className="hover:text-gold">
-              {site.phone}
-            </a>
-            <br />
+            {site.phone && (
+              <>
+                <a href={site.phoneHref} className="hover:text-gold">
+                  {site.phone}
+                </a>
+                <br />
+              </>
+            )}
             <a href={`mailto:${site.email}`} className="hover:text-gold">
               {site.email}
             </a>

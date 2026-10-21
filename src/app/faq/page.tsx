@@ -7,7 +7,7 @@ import { faqGroups } from "@/data/faq";
 export const metadata: Metadata = {
   title: "FAQ — Frequently Asked Questions",
   description:
-    "Answers to common questions about eating, drinking, staying and celebrating at The Queen's Head, Littlebury — bookings, dogs, parking, allergies, check-in and more.",
+    "Answers to common questions about eating, drinking, staying and celebrating at The Queen's Head, Littlebury — opening hours, bookings, allergies, private hire and getting here.",
 };
 
 export default function FaqPage() {
@@ -29,7 +29,7 @@ export default function FaqPage() {
       <PageHero
         eyebrow="Help"
         title="Frequently asked questions"
-        lede="The things people ask us most. If your question isn't here, call us or send a message — we're quick to reply."
+        lede="The things people ask us most. If your question isn't here, send us a message — we're quick to reply."
       />
       <Section tone="cream">
         <div className="grid gap-12 lg:grid-cols-[240px_1fr]">

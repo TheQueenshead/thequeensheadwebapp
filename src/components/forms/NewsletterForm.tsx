@@ -1,14 +1,23 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import Turnstile, { turnstileSiteKey } from "./Turnstile";
 
 export default function NewsletterForm({ compact = false }: { compact?: boolean }) {
   const [status, setStatus] = useState<"idle" | "sending" | "done" | "error">("idle");
   const [error, setError] = useState<string | null>(null);
+  const [captcha, setCaptcha] = useState("");
+  const [captchaKey, setCaptchaKey] = useState(0);
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (turnstileSiteKey && !captcha) {
+      setStatus("error");
+      setError("The security check is still running — please try again in a moment. If this keeps happening, give us a call.");
+      return;
+    }
     setStatus("sending");
+    setError(null);
     const data = new FormData(e.currentTarget);
     try {
       const res = await fetch("/api/newsletter", {
@@ -18,6 +27,7 @@ export default function NewsletterForm({ compact = false }: { compact?: boolean 
           email: data.get("email"),
           name: data.get("name") ?? undefined,
           website: data.get("website") ?? "",
+          captcha: captcha || undefined,
         }),
       });
       const json = await res.json();
@@ -26,6 +36,7 @@ export default function NewsletterForm({ compact = false }: { compact?: boolean 
     } catch (err) {
       setStatus("error");
       setError(err instanceof Error ? err.message : "Something went wrong");
+      setCaptchaKey((k) => k + 1);
     }
   }
 
@@ -75,6 +86,7 @@ export default function NewsletterForm({ compact = false }: { compact?: boolean 
           {status === "sending" ? "…" : compact ? "Join" : "Sign me up"}
         </button>
       </div>
+      <Turnstile onToken={setCaptcha} resetKey={captchaKey} />
       {error && (
         <p role="alert" className="text-xs font-medium text-wine">
           {error}

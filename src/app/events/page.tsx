@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { PageHero, Photo, Section, SectionHead, Card } from "@/components/ui";
 import NewsletterForm from "@/components/forms/NewsletterForm";
 import { events, recurring } from "@/data/events";
@@ -8,7 +9,7 @@ import { upcoming, groupByMonth, eventDateParts } from "@/lib/events";
 export const metadata: Metadata = {
   title: "Events & What's On",
   description:
-    "Quiz nights, live music, supper clubs and seasonal celebrations at The Queen's Head, Littlebury. See the events calendar and sign up for our newsletter.",
+    "Events at The Queen's Head, Littlebury. See what's coming up and sign up to our newsletter to hear about new events first.",
 };
 
 // Re-render once a day so past events disappear without a redeploy
@@ -23,7 +24,7 @@ export default function EventsPage() {
       <PageHero
         eyebrow="What's on"
         title="Events at the Queen's Head"
-        lede="From quiz night to bonfire night, there's always something going on. Most events are free — just turn up. Where booking is needed, we've said so."
+        lede="What's coming up at the pub. Join the newsletter to hear about new events first."
         image="liveMusic"
       >
         <a href="#newsletter" className="btn btn-gold">
@@ -32,17 +33,19 @@ export default function EventsPage() {
       </PageHero>
 
       {/* Regulars */}
-      <Section tone="white" className="!py-12">
-        <div className="reveal-stagger grid gap-4 md:grid-cols-4">
-          {recurring.map((r) => (
-            <Card key={r.title} className="!p-5">
-              <p className="text-xs font-semibold uppercase tracking-wider text-wine">{r.day}</p>
-              <h2 className="mt-1 text-xl">{r.title}</h2>
-              <p className="mt-1 text-sm text-muted">{r.desc}</p>
-            </Card>
-          ))}
-        </div>
-      </Section>
+      {recurring.length > 0 && (
+        <Section tone="white" className="!py-12">
+          <div className="reveal-stagger grid gap-4 md:grid-cols-4">
+            {recurring.map((r) => (
+              <Card key={r.title} className="!p-5">
+                <p className="text-xs font-semibold uppercase tracking-wider text-wine">{r.day}</p>
+                <h2 className="mt-1 text-xl">{r.title}</h2>
+                <p className="mt-1 text-sm text-muted">{r.desc}</p>
+              </Card>
+            ))}
+          </div>
+        </Section>
+      )}
 
       {/* Calendar */}
       <Section tone="cream">
@@ -74,9 +77,21 @@ export default function EventsPage() {
                         <span className="text-xs uppercase tracking-widest">{d.mon}</span>
                         <span className="text-xs text-white/70 md:mt-1">{d.weekday.slice(0, 3)}</span>
                       </time>
-                      <div className="relative hidden md:block">
-                        {e.image && <Photo id={e.image} sizes="220px" />}
-                      </div>
+                      {e.poster ? (
+                        <a
+                          href={e.poster}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="relative mx-6 block aspect-[2/3] max-w-[220px] overflow-hidden rounded-[var(--radius-sm)] bg-white md:mx-0 md:my-4 md:max-w-none md:rounded-none md:aspect-auto md:min-h-[300px]"
+                          aria-label={`View the full poster for ${e.title}`}
+                        >
+                          <Image src={e.poster} alt={e.posterAlt ?? `Poster for ${e.title}`} fill sizes="220px" className="object-contain" />
+                        </a>
+                      ) : (
+                        <div className="relative hidden md:block">
+                          {e.image && <Photo id={e.image} sizes="220px" />}
+                        </div>
+                      )}
                       <div className="flex flex-col p-6 pt-0 md:pt-6">
                         <h4 className="text-2xl">{e.title}</h4>
                         <p className="mt-1 text-sm font-semibold text-wine">
@@ -108,7 +123,7 @@ export default function EventsPage() {
             <SectionHead
               eyebrow="Newsletter"
               title="Be the first to know"
-              lede="Supper clubs sell out and New Year's Eve goes in a week. Join the list and we'll email you before we post anything anywhere else — roughly once a month, never more."
+              lede="Join the list and we'll email you when new events are announced — roughly once a month, never more."
               light
             />
           </div>
