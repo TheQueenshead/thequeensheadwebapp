@@ -15,7 +15,7 @@ export const metadata: Metadata = site.comingSoon.menu
   : {
       title: "Menu — Food & Drink",
       description:
-        "Seasonal British pub food, Sunday roasts, local cask ales and wine at The Queen's Head, Littlebury. Full menu with prices, dietary tags and allergen information.",
+        "Spanish tapas, Mediterranean dining and British pub classics at The Queen's Head, Littlebury. Full menu with prices and dietary information.",
     };
 
 export default function MenuPage() {
@@ -91,7 +91,7 @@ function FullMenu() {
       <PageHero
         eyebrow="Food & drink"
         title="Cooked from scratch, every day"
-        lede="Seasonal British food built on produce from Essex and its neighbours, alongside local ales and a wine list we've tasted our way through."
+        lede="Spanish tapas, Mediterranean dining and British pub classics — small plates made for sharing, generous mains and a few old favourites done properly."
         image="steak"
       >
         <Link href="/book" className="btn btn-gold">
@@ -129,7 +129,7 @@ function FullMenu() {
             <h2 className="text-2xl">Allergens</h2>
             <Notice>
               <p>
-                Allergens are listed under each dish. Our kitchen handles all 14 regulated
+                Our kitchen handles all 14 regulated
                 allergens, so while we take every care we cannot guarantee any dish is
                 completely free from traces. <strong>Please tell us about any allergy or
                 intolerance when you book and again when you order</strong> — we&rsquo;re
@@ -146,8 +146,8 @@ function FullMenu() {
       </Section>
 
       <CTABand
-        title="Sunday roast is booking up"
-        text="Served 12–5pm every Sunday. Send a booking request and we'll confirm your table."
+        title="Tables go quickly"
+        text="The kitchen is open Wednesday to Saturday from 6pm. Send a booking request and we'll confirm your table."
         primary={{ href: "/book", label: "Book a table" }}
         secondary={{ href: "/private-dining", label: "Feasting menus for groups" }}
       />
