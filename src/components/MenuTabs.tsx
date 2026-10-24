@@ -9,34 +9,36 @@ export default function MenuTabs({ menus }: { menus: Menu[] }) {
 
   return (
     <div>
-      <div role="tablist" aria-label="Menus" className="mb-10 flex flex-wrap gap-2">
-        {menus.map((m) => {
-          const selected = m.id === active;
-          return (
-            <button
-              key={m.id}
-              role="tab"
-              id={`tab-${m.id}`}
-              aria-selected={selected}
-              aria-controls={`panel-${m.id}`}
-              tabIndex={selected ? 0 : -1}
-              onClick={() => setActive(m.id)}
-              onKeyDown={(e) => {
-                const i = menus.findIndex((x) => x.id === active);
-                if (e.key === "ArrowRight") setActive(menus[(i + 1) % menus.length].id);
-                if (e.key === "ArrowLeft") setActive(menus[(i - 1 + menus.length) % menus.length].id);
-              }}
-              className={`rounded-full border px-5 py-2.5 text-sm font-semibold transition-colors ${
-                selected
-                  ? "border-wine bg-wine text-white"
-                  : "border-black/10 bg-white text-ink hover:border-wine hover:text-wine"
-              }`}
-            >
-              {m.label}
-            </button>
-          );
-        })}
-      </div>
+      {menus.length > 1 && (
+        <div role="tablist" aria-label="Menus" className="mb-10 flex flex-wrap gap-2">
+          {menus.map((m) => {
+            const selected = m.id === active;
+            return (
+              <button
+                key={m.id}
+                role="tab"
+                id={`tab-${m.id}`}
+                aria-selected={selected}
+                aria-controls={`panel-${m.id}`}
+                tabIndex={selected ? 0 : -1}
+                onClick={() => setActive(m.id)}
+                onKeyDown={(e) => {
+                  const i = menus.findIndex((x) => x.id === active);
+                  if (e.key === "ArrowRight") setActive(menus[(i + 1) % menus.length].id);
+                  if (e.key === "ArrowLeft") setActive(menus[(i - 1 + menus.length) % menus.length].id);
+                }}
+                className={`rounded-full border px-5 py-2.5 text-sm font-semibold transition-colors ${
+                  selected
+                    ? "border-wine bg-wine text-white"
+                    : "border-black/10 bg-white text-ink hover:border-wine hover:text-wine"
+                }`}
+              >
+                {m.label}
+              </button>
+            );
+          })}
+        </div>
+      )}
 
       <div role="tabpanel" id={`panel-${menu.id}`} aria-labelledby={`tab-${menu.id}`}>
         <div className="mb-10 max-w-[68ch]">

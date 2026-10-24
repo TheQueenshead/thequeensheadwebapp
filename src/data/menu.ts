@@ -1,10 +1,13 @@
 /**
  * MENU
  * ------------------------------------------------------------------
- * FOOD MENU = the client's real menu, transcribed from the printed
- * board (Spanish tapas · Mediterranean dining · British pub classics).
+ * The client's real menu, transcribed from the printed board
+ * (Spanish tapas · Mediterranean dining · British pub classics).
  *
- * DRINKS = still SAMPLE CONTENT. Replace with the client's real list.
+ * There is no drinks menu: the client has not supplied a drinks list,
+ * and the sample one that used to sit here has been removed rather than
+ * left to go live. Add a second entry to `menus` when the real list
+ * arrives and the tab bar reappears on its own.
  *
  * ALLERGENS: the client's printed menu carries no allergen information,
  * so none is listed here. Do NOT guess it — under the Food Information
@@ -124,59 +127,6 @@ export const menus: Menu[] = [
           { name: "Creamy Mashed Potatoes", price: "4.50" },
           { name: "Seasonal Vegetables", price: "4.50" },
           { name: "Mixed Leaf Salad", price: "4.50" },
-        ],
-      },
-    ],
-  },
-  {
-    id: "drinks",
-    label: "Drinks",
-    served: "All day, every day we're open",
-    intro:
-      "Local cask ales, a carefully chosen wine list and classic cocktails made properly. Ask at the bar for our guest ale of the week.",
-    sections: [
-      {
-        title: "Cask & craft",
-        note: "Prices per pint. Halves and thirds available.",
-        items: [
-          { name: "Adnams Ghost Ship", desc: "Pale ale · 4.5% · Southwold", price: "5.60" },
-          { name: "Woodforde's Wherry", desc: "Amber bitter · 3.8% · Norfolk", price: "5.40" },
-          { name: "Guest cask ale", desc: "Changes weekly — ask at the bar", price: "5.50" },
-          { name: "Camden Hells", desc: "Lager · 4.6%", price: "6.20" },
-          { name: "Aspall Cyder", desc: "Suffolk cider · 5.5%", price: "5.80" },
-          { name: "Guinness", desc: "Stout · 4.2%", price: "6.00" },
-          { name: "Lucky Saint", desc: "Alcohol-free lager · 0.5%", price: "4.80" },
-        ],
-      },
-      {
-        title: "Wines by the glass",
-        note: "175ml / 250ml · All wines also by the bottle. Full list available at the bar.",
-        items: [
-          { name: "Picpoul de Pinet, Languedoc", desc: "Crisp, citrus, sea-breeze fresh", price: "8.50 / 11.50" },
-          { name: "Sauvignon Blanc, Marlborough", desc: "Gooseberry, lime, zesty", price: "9.00 / 12.50" },
-          { name: "Provence Rosé", desc: "Pale, dry, strawberry", price: "9.00 / 12.50" },
-          { name: "Malbec, Mendoza", desc: "Plum, spice, soft tannins", price: "8.50 / 11.50" },
-          { name: "Rioja Crianza", desc: "Cherry, vanilla, oak", price: "9.50 / 13.00" },
-          { name: "English sparkling, Essex", desc: "Local fizz — the perfect start", price: "12.00 (125ml)" },
-        ],
-      },
-      {
-        title: "Cocktails",
-        items: [
-          { name: "Queen's Negroni", desc: "Gin, Campari, sweet vermouth, orange", price: "11.00" },
-          { name: "Espresso Martini", desc: "Vodka, coffee liqueur, fresh espresso", price: "11.00" },
-          { name: "Rhubarb & Ginger Fizz", desc: "Rhubarb gin, ginger, prosecco", price: "10.50" },
-          { name: "Hedgerow Sour", desc: "Sloe gin, lemon, blackberry", price: "10.50" },
-        ],
-      },
-      {
-        title: "Soft drinks & hot drinks",
-        items: [
-          { name: "Fentimans (assorted)", price: "3.50" },
-          { name: "Fresh juices", desc: "Orange, apple, cranberry", price: "3.20" },
-          { name: "Fever-Tree mixers", price: "2.80" },
-          { name: "Coffee", desc: "Americano, latte, cappuccino, flat white", price: "3.20 – 3.60" },
-          { name: "Pot of tea", desc: "Breakfast, Earl Grey, herbal", price: "3.00" },
         ],
       },
     ],
