@@ -13,7 +13,7 @@ import {
  * Set these in .env.local (and in Vercel → Project → Settings → Env):
  *   RESEND_API_KEY        — from resend.com
  *   ENQUIRY_TO_EMAIL      — the pub's inbox (can be comma-separated)
- *   ENQUIRY_FROM_EMAIL    — e.g. "The Queen's Head <enquiries@queensheadlittlebury.co.uk>"
+ *   ENQUIRY_FROM_EMAIL    — e.g. "The Queen's Head <enquiries@thequeensheadlittlebury.co.uk>"
  *                            (domain must be verified in Resend)
  *   RESEND_AUDIENCE_ID    — optional, for newsletter sign-ups
  *
