@@ -10,7 +10,7 @@ export const site = {
   tagline: "A 14th-century inn in the Essex countryside",
   description:
     "The Queen's Head is a restored 14th-century village pub and inn in Littlebury, near Saffron Walden and Audley End. Good food, a well-kept bar, six cosy bedrooms and a warm welcome.",
-  url: "https://www.queensheadlittlebury.co.uk", // TODO confirm domain
+  url: "https://www.thequeensheadlittlebury.co.uk",
 
   address: {
     line1: "High Street",
@@ -33,7 +33,7 @@ export const site = {
   // Phone and WhatsApp are hidden everywhere on the site while empty.
   phone: "", // TODO the pub's phone number, e.g. "01799 123 456"
   phoneHref: "", // TODO same number in tel: form, e.g. "tel:+441799123456"
-  email: "info@queensheadlittlebury.co.uk",
+  email: "info@thequeensheadlittlebury.co.uk",
   whatsapp: "", // TODO WhatsApp business number, international format, no +, e.g. "447123456789"
 
   social: {
