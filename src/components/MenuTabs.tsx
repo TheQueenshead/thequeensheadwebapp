@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { Menu } from "@/data/menu";
+import { site } from "@/data/site";
 
 export default function MenuTabs({ menus }: { menus: Menu[] }) {
   const [active, setActive] = useState(menus[0].id);
@@ -76,7 +77,11 @@ export default function MenuTabs({ menus }: { menus: Menu[] }) {
                       )}
                     </div>
                     <p className="shrink-0 font-display text-lg font-semibold text-wine">
-                      {d.price.includes("£") ? d.price : d.price.replace(/(\d+\.\d{2})/g, "£$1")}
+                      {!site.showMenuPrices
+                        ? "Ask"
+                        : d.price.includes("£")
+                          ? d.price
+                          : d.price.replace(/(\d+\.\d{2})/g, "£$1")}
                     </p>
                   </li>
                 ))}

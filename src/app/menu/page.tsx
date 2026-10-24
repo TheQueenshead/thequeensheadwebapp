@@ -15,7 +15,7 @@ export const metadata: Metadata = site.comingSoon.menu
   : {
       title: "Menu — Food & Drink",
       description:
-        "Spanish tapas, Mediterranean dining and British pub classics at The Queen's Head, Littlebury. Full menu with prices and dietary information.",
+        "Spanish tapas, Mediterranean dining and British pub classics at The Queen's Head, Littlebury. Full menu with dietary information.",
     };
 
 export default function MenuPage() {
@@ -137,9 +137,9 @@ function FullMenu() {
               </p>
             </Notice>
             <p className="mt-4 text-sm text-muted">
-              Menus change with the seasons and availability; prices include VAT. A
-              discretionary 10% service charge is added to tables of six or more and shared
-              in full among the team.
+              {site.showMenuPrices
+                ? "Menus change with the seasons and availability; prices include VAT."
+                : "Menus change with the seasons and availability. Please ask a member of the team for current prices."}
             </p>
           </div>
         </div>

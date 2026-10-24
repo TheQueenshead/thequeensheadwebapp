@@ -54,6 +54,10 @@ export const site = {
     rooms: true,
   },
 
+  // false → every menu price shows as "Ask" (prices stay in menu.ts, ready
+  // to switch back on once they've been checked and confirmed).
+  showMenuPrices: false,
+
   // The pub's Booking.com property page. While rooms are "coming soon" the
   // site sends guests here to see the rooms, photos and rates. Buttons
   // appear automatically once this is filled in.

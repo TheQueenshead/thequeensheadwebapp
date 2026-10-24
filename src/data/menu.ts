@@ -51,7 +51,8 @@ export const menus: Menu[] = [
     sections: [
       {
         title: "Spanish Tapas",
-        note: "Small plates, big flavours — perfect for sharing. 3 selected tapas £20 · 5 selected tapas £32. Premium dishes may carry a supplement.",
+        // Tapas deal (re-add once prices are confirmed): 3 selected tapas £20 · 5 selected tapas £32. Premium dishes may carry a supplement.
+        note: "Small plates, big flavours — perfect for sharing. Ask about our tapas deals.",
         items: [
           { name: "Garlic King Prawns", desc: "Succulent king prawns sizzling in garlic, chilli and olive oil.", price: "9.95" },
           { name: "Tempura King Prawns", desc: "Crispy king prawns in a light tempura batter, served with a dipping sauce.", price: "9.95" },
