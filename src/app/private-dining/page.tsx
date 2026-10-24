@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { PageHero, Photo, Section, SectionHead, Notice } from "@/components/ui";
+import { PageHero, Photo, Section, SectionHead, Notice, CTABand } from "@/components/ui";
 import EnquiryForm from "@/components/forms/EnquiryForm";
 import { spaces, setMenus } from "@/data/spaces";
 
@@ -130,6 +130,13 @@ export default function PrivateDiningPage() {
           </div>
         </div>
       </Section>
+      <CTABand
+        title="Something smaller in mind?"
+        text="Not every occasion needs the whole pub. Book a table for dinner, or have a look at what the kitchen is cooking."
+        primary={{ href: "/book", label: "Book a table" }}
+        secondary={{ href: "/menu", label: "See the menu" }}
+      />
+
     </>
   );
 }
