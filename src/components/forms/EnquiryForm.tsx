@@ -15,6 +15,8 @@ export type FieldDef = {
   max?: number | string;
   half?: boolean; // sit two fields side by side
   help?: string;
+  defaultValue?: string; // pre-fill the field (e.g. the date of an event)
+  hidden?: boolean; // carried with the enquiry but not shown to the guest
 };
 
 type Props = {
@@ -114,14 +116,20 @@ export default function EnquiryForm({
   }
 
   const all = [...baseFields, ...fields];
+  const visible = all.filter((f) => !f.hidden);
+  const carried = all.filter((f) => f.hidden);
 
   return (
     <form onSubmit={onSubmit} noValidate={false} className="space-y-5">
       <div className="grid gap-5 sm:grid-cols-2">
-        {all.map((f) => (
+        {visible.map((f) => (
           <Field key={f.name} def={f} />
         ))}
       </div>
+
+      {carried.map((f) => (
+        <input key={f.name} type="hidden" name={f.name} defaultValue={f.defaultValue ?? ""} />
+      ))}
 
       {/* Honeypot — hidden from people, tempting to bots */}
       <div className="absolute -left-[9999px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
@@ -170,9 +178,9 @@ function Field({ def }: { def: FieldDef }) {
         {def.required && <span className="text-wine"> *</span>}
       </label>
       {def.type === "textarea" ? (
-        <textarea {...common} rows={4} />
+        <textarea {...common} rows={4} defaultValue={def.defaultValue} />
       ) : def.type === "select" ? (
-        <select {...common} defaultValue="">
+        <select {...common} defaultValue={def.defaultValue ?? ""}>
           <option value="" disabled>
             Please choose…
           </option>
@@ -186,6 +194,7 @@ function Field({ def }: { def: FieldDef }) {
         <input
           {...common}
           type={def.type ?? "text"}
+          defaultValue={def.defaultValue}
           min={def.min}
           max={def.max}
           autoComplete={

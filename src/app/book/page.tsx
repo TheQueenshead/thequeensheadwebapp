@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { PageHero, Photo, Section, Notice } from "@/components/ui";
-import EnquiryForm from "@/components/forms/EnquiryForm";
+import EnquiryForm, { type FieldDef } from "@/components/forms/EnquiryForm";
 import { site } from "@/data/site";
+import { events } from "@/data/events";
 
 export const metadata: Metadata = {
   title: "Book a Table",
@@ -13,13 +15,62 @@ const times = [
   "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00",
 ];
 
-export default function BookPage() {
+/**
+ * Events write their time however reads best on the page ("8.30pm", "8pm").
+ * Map that onto one of the slots above so the dropdown can be pre-filled.
+ * Returns "" when it doesn't land on a slot — the guest then picks their own.
+ */
+function toSlot(raw: string): string {
+  const m = raw.trim().toLowerCase().replace(/\s+/g, "").match(/^(\d{1,2})[.:]?(\d{2})?(am|pm)?$/);
+  if (!m) return "";
+  let hour = Number(m[1]);
+  const mins = m[2] ?? "00";
+  if (m[3] === "pm" && hour < 12) hour += 12;
+  if (m[3] === "am" && hour === 12) hour = 0;
+  const slot = `${String(hour).padStart(2, "0")}:${mins}`;
+  return times.includes(slot) ? slot : "";
+}
+
+function longDate(iso: string): string {
+  return new Date(`${iso}T12:00:00`).toLocaleDateString("en-GB", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+}
+
+export default async function BookPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ event?: string }>;
+}) {
+  const { event: slug } = await searchParams;
+  const ev = slug ? events.find((e) => e.slug === slug) : undefined;
+
+  // Carried with the enquiry but not shown to the guest, so the team can tell
+  // an event booking from an ordinary dinner booking at a glance.
+  const carried: FieldDef[] = ev
+    ? [
+        {
+          name: "event",
+          label: "Event",
+          hidden: true,
+          defaultValue: `${ev.title} — ${longDate(ev.date)}, ${ev.time}`,
+        },
+      ]
+    : [];
+
   return (
     <>
       <PageHero
-        eyebrow="Reservations"
-        title="Book a table"
-        lede="Send us your details and we'll confirm your table by email or phone. For groups of eight or more, tell us in the special requests box and we'll find the best table."
+        eyebrow={ev ? "Events" : "Reservations"}
+        title={ev ? `Book for ${ev.title}` : "Book a table"}
+        lede={
+          ev
+            ? `${longDate(ev.date)} · ${ev.time}. Send us your details and we'll confirm your table by email or phone — event nights fill up, so the sooner the better.`
+            : "Send us your details and we'll confirm your table by email or phone. For groups of eight or more, tell us in the special requests box and we'll find the best table."
+        }
         image="diningRoom"
       >
         {site.phone && (
@@ -34,15 +85,32 @@ export default function BookPage() {
           <div className="rounded-[var(--radius-lg)] bg-white p-7 shadow-lift md:p-10">
             <h2 className="text-2xl">Your booking request</h2>
             <p className="mb-8 mt-1 text-sm text-muted">Fields marked * are required.</p>
+
+            {ev && (
+              <div className="mb-8">
+                <Notice>
+                  <p>
+                    You&rsquo;re booking for <strong>{ev.title}</strong> —{" "}
+                    {longDate(ev.date)}, {ev.time}. We&rsquo;ve filled in the date and time
+                    for you.{" "}
+                    <Link href="/events" className="font-semibold text-wine">
+                      See all events
+                    </Link>
+                  </p>
+                </Notice>
+              </div>
+            )}
+
             <EnquiryForm
               type="table"
               submitLabel="Send booking request"
               fields={[
-                { name: "date", label: "Date", type: "date", required: true, half: true },
-                { name: "time", label: "Time", type: "select", required: true, half: true, options: times },
+                { name: "date", label: "Date", type: "date", required: true, half: true, defaultValue: ev?.date },
+                { name: "time", label: "Time", type: "select", required: true, half: true, options: times, defaultValue: ev ? toSlot(ev.time) : undefined },
                 { name: "guests", label: "Number of guests", type: "select", required: true, half: true, options: ["1", "2", "3", "4", "5", "6", "7", "8+ (we'll call you)"] },
                 { name: "occasion", label: "Occasion (optional)", type: "select", half: true, options: ["Just because", "Birthday", "Anniversary", "Business", "Celebration", "Other"] },
                 { name: "requests", label: "Special requests", type: "textarea", placeholder: "Allergies, high chair, wheelchair access, a table by the fire…" },
+                ...carried,
               ]}
               note={
                 <Notice>
@@ -52,7 +120,11 @@ export default function BookPage() {
                 </Notice>
               }
               successTitle="Request received — thank you"
-              successBody="We'll confirm your table by email or phone as soon as we can. If you don't hear from us within a day, please send us a message."
+              successBody={
+                ev
+                  ? `We'll confirm your table for ${ev.title} by email or phone as soon as we can. If you don't hear from us within a day, please send us a message.`
+                  : "We'll confirm your table by email or phone as soon as we can. If you don't hear from us within a day, please send us a message."
+              }
             />
           </div>
 
