@@ -10,7 +10,7 @@ export const site = {
   tagline: "A 14th-century inn in the Essex countryside",
   description:
     "The Queen's Head is a restored 14th-century village pub and inn in Littlebury, near Saffron Walden and Audley End. Good food, a well-kept bar, six cosy bedrooms and a warm welcome.",
-  url: "https://www.queensheadlittlebury.co.uk", // TODO confirm domain
+  url: "https://www.thequeensheadlittlebury.co.uk",
 
   address: {
     line1: "High Street",
