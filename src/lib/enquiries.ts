@@ -9,7 +9,9 @@ export const enquiryTypes = {
   table: {
     label: "Table booking request",
     subject: (d: Fields) =>
-      `Table request — ${d.date} at ${d.time} for ${d.guests}`,
+      d.event
+        ? `Event booking — ${d.event} — ${d.guests} guest(s)`
+        : `Table request — ${d.date} at ${d.time} for ${d.guests}`,
   },
   room: {
     label: "Room availability enquiry",
@@ -63,6 +65,7 @@ export type EnquiryPayload = z.infer<typeof enquirySchema>;
 
 /** Human-readable labels for field keys, used in the email body */
 export const fieldLabels: Record<string, string> = {
+  event: "Event",
   date: "Date",
   time: "Time",
   guests: "Number of guests",

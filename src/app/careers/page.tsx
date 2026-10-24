@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { PageHero, Photo, Section, SectionHead, Card, Notice } from "@/components/ui";
+import { PageHero, Photo, Section, SectionHead, Card, Notice, CTABand } from "@/components/ui";
 import EnquiryForm from "@/components/forms/EnquiryForm";
 import { vacancies, perks } from "@/data/careers";
 import { site } from "@/data/site";
@@ -115,6 +115,13 @@ export default function CareersPage() {
           </div>
         </div>
       </Section>
+      <CTABand
+        title="Come and see us first"
+        text="The best way to know whether you'd like working here is to spend an evening in the pub."
+        primary={{ href: "/book", label: "Book a table" }}
+        secondary={{ href: "/about", label: "About the pub" }}
+      />
+
     </>
   );
 }

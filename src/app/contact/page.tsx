@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { PageHero, Section, SectionHead } from "@/components/ui";
+import { PageHero, Section, SectionHead, CTABand } from "@/components/ui";
 import EnquiryForm from "@/components/forms/EnquiryForm";
 import MapEmbed from "@/components/MapEmbed";
 import { SocialLinks } from "@/components/SocialLinks";
@@ -122,6 +122,13 @@ export default function ContactPage() {
           </div>
         </div>
       </Section>
+      <CTABand
+        title="Ready when you are"
+        text="No need to wait for a reply if all you want is a table — send a booking request and we'll confirm it."
+        primary={{ href: "/book", label: "Book a table" }}
+        secondary={{ href: "/events", label: "What's on" }}
+      />
+
     </>
   );
 }

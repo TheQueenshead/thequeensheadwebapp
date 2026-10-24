@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { PageHero, Photo, Section, SectionHead, Notice } from "@/components/ui";
+import { PageHero, Photo, Section, SectionHead, Notice, CTABand } from "@/components/ui";
 import EnquiryForm from "@/components/forms/EnquiryForm";
 import BookingComLink from "@/components/BookingComLink";
 import { rooms, roomsInfo } from "@/data/rooms";
@@ -66,6 +66,13 @@ function RoomsComingSoon() {
       </Section>
 
       <RoomEnquiry />
+
+      <CTABand
+        title="Make a night of it"
+        text="Dinner downstairs, a nightcap by the fire and no taxi home. Book a table for the evening of your stay."
+        primary={{ href: "/book", label: "Book a table" }}
+        secondary={{ href: "/events", label: "What's on" }}
+      />
     </>
   );
 }
@@ -184,6 +191,13 @@ function FullRooms() {
       </Section>
 
       <RoomEnquiry roomNames={rooms.map((r) => r.name)} />
+
+      <CTABand
+        title="Make a night of it"
+        text="Dinner downstairs, a nightcap by the fire and no taxi home. Book a table for the evening of your stay."
+        primary={{ href: "/book", label: "Book a table" }}
+        secondary={{ href: "/events", label: "What's on" }}
+      />
     </>
   );
 }

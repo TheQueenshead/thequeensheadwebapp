@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { PageHero, Photo, Section, SectionHead, Notice } from "@/components/ui";
+import { PageHero, Photo, Section, SectionHead, Notice, CTABand } from "@/components/ui";
 import EnquiryForm from "@/components/forms/EnquiryForm";
 import { site } from "@/data/site";
 
@@ -84,6 +84,13 @@ export default function GiftCardsPage() {
           </div>
         </div>
       </Section>
+      <CTABand
+        title="Not sure what to give?"
+        text="Dinner for two, an evening with friends or a night in one of our rooms — have a look and we'll help you decide."
+        primary={{ href: "/menu", label: "See the menu" }}
+        secondary={{ href: "/rooms", label: "See the rooms" }}
+      />
+
     </>
   );
 }

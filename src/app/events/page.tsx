@@ -101,7 +101,7 @@ export default function EventsPage() {
                         <p className="mt-3 flex-1 text-body">{e.desc}</p>
                         {e.bookable && (
                           <div className="mt-4">
-                            <Link href={`/book`} className="btn btn-outline btn-sm">
+                            <Link href={`/book?event=${e.slug}`} className="btn btn-outline btn-sm">
                               Book for this event
                             </Link>
                           </div>
