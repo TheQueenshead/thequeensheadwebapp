@@ -7,7 +7,7 @@ const schema = z.object({
   email: z.string().trim().email("Please enter a valid email address"),
   name: z.string().trim().max(120).optional(),
   website: z.string().max(0).optional().or(z.literal("")),
-  captcha: z.string().max(4096).optional(),
+  captcha: z.string().max(2048).optional(),
 });
 
 export async function POST(req: Request) {
@@ -29,7 +29,7 @@ export async function POST(req: Request) {
   if (parsed.data.website) return NextResponse.json({ ok: true });
 
   try {
-    if (!(await verifyCaptcha(parsed.data.captcha, ip))) {
+    if (!(await verifyCaptcha(parsed.data.captcha, ip, "newsletter"))) {
       return NextResponse.json(
         { error: "Please complete the security check and try again." },
         { status: 400 },

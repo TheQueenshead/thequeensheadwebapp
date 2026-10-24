@@ -38,7 +38,7 @@ export async function POST(req: Request) {
   }
 
   try {
-    if (!(await verifyCaptcha(parsed.data.captcha, ip))) {
+    if (!(await verifyCaptcha(parsed.data.captcha, ip, "enquiry"))) {
       return NextResponse.json(
         { error: "Please complete the security check and try again." },
         { status: 400 },

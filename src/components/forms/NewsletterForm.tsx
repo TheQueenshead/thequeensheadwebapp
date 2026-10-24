@@ -86,7 +86,7 @@ export default function NewsletterForm({ compact = false }: { compact?: boolean 
           {status === "sending" ? "…" : compact ? "Join" : "Sign me up"}
         </button>
       </div>
-      <Turnstile onToken={setCaptcha} resetKey={captchaKey} />
+      <Turnstile onToken={setCaptcha} resetKey={captchaKey} action="newsletter" />
       {error && (
         <p role="alert" className="text-xs font-medium text-wine">
           {error}

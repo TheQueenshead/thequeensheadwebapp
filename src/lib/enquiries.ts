@@ -50,7 +50,7 @@ export const enquirySchema = z.object({
   // Honeypot — real people never fill this in
   website: z.string().max(0).optional().or(z.literal("")),
   // Cloudflare Turnstile token (see src/lib/guard.ts)
-  captcha: z.string().max(4096).optional(),
+  captcha: z.string().max(2048).optional(),
   // Any other fields the specific form collects — only names listed in
   // fieldLabels below are accepted. Add new form fields there first.
   fields: z

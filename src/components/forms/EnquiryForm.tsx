@@ -137,7 +137,7 @@ export default function EnquiryForm({
         <input id={`${type}-website`} name="website" type="text" tabIndex={-1} autoComplete="off" />
       </div>
 
-      <Turnstile onToken={setCaptcha} resetKey={captchaKey} />
+      <Turnstile onToken={setCaptcha} resetKey={captchaKey} action="enquiry" />
 
       {note && <div className="rounded-[var(--radius-sm)] border-l-4 border-wine bg-cream px-4 py-3 text-sm text-body">{note}</div>}
 

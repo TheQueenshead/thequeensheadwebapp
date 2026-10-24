@@ -88,6 +88,13 @@ function wrap(title: string, body: string) {
 export async function sendEnquiry(payload: EnquiryPayload) {
   const meta = enquiryTypes[payload.type];
   const subject = meta.subject({ ...payload.fields, name: payload.name });
+  // A table booking made from an event's "Book" button carries the event
+  // name, so the email says "Event booking request" rather than a plain
+  // table request.
+  const label =
+    payload.type === "table" && payload.fields.event
+      ? "Event booking request"
+      : meta.label;
 
   if (isLive()) {
     requireLiveConfig(["RESEND_API_KEY", "ENQUIRY_TO_EMAIL", "ENQUIRY_FROM_EMAIL"]);
@@ -107,8 +114,8 @@ export async function sendEnquiry(payload: EnquiryPayload) {
     replyTo: payload.email,
     subject: `[Website] ${subject}`,
     html: wrap(
-      meta.label,
-      `<p style="margin:0 0 16px">A new ${meta.label.toLowerCase()} has come through the website. Reply to this email to respond directly to the customer.</p>${table(payload)}`,
+      label,
+      `<p style="margin:0 0 16px">A new ${label.toLowerCase()} has come through the website. Reply to this email to respond directly to the customer.</p>${table(payload)}`,
     ),
   });
 
@@ -120,10 +127,10 @@ export async function sendEnquiry(payload: EnquiryPayload) {
     from: FROM,
     to: payload.email,
     replyTo: TO,
-    subject: `We've received your ${meta.label.toLowerCase()} — ${site.name}`,
+    subject: `We've received your ${label.toLowerCase()} — ${site.name}`,
     html: wrap(
       `Thank you, ${payload.name.split(" ")[0].slice(0, 30)}`,
-      `<p>We've received your ${meta.label.toLowerCase()} and one of the team will be in touch shortly to confirm.</p>
+      `<p>We've received your ${label.toLowerCase()} and one of the team will be in touch shortly to confirm.</p>
        <p style="color:#6b5f57;font-size:13px"><strong>Please note:</strong> this is an enquiry, not a confirmed booking. Nothing is reserved until we've replied.</p>
        ${site.phone ? `<p style="margin-top:20px">Need us sooner? Call <a href="${site.phoneHref}" style="color:#8E1616">${escape(site.phone)}</a>.</p>` : `<p style="margin-top:20px">Need us sooner? Just reply to this email.</p>`}`,
     ),

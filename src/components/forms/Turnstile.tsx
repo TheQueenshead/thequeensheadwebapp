@@ -27,9 +27,11 @@ type Props = {
   onToken: (token: string) => void;
   /** Change this to get a new token (tokens are single-use) */
   resetKey?: number;
+  /** Which form this is — checked on the server ("enquiry" | "newsletter") */
+  action: string;
 };
 
-export default function Turnstile({ onToken, resetKey = 0 }: Props) {
+export default function Turnstile({ onToken, resetKey = 0, action }: Props) {
   const el = useRef<HTMLDivElement>(null);
   const onTokenRef = useRef(onToken);
   const [ready, setReady] = useState(false);
@@ -43,6 +45,7 @@ export default function Turnstile({ onToken, resetKey = 0 }: Props) {
     if (!ready || !turnstileSiteKey || !el.current || !api) return;
     const id = api.render(el.current, {
       sitekey: turnstileSiteKey,
+      action,
       appearance: "interaction-only",
       callback: (t: string) => onTokenRef.current(t),
       "expired-callback": () => onTokenRef.current(""),
@@ -52,7 +55,7 @@ export default function Turnstile({ onToken, resetKey = 0 }: Props) {
       onTokenRef.current("");
       api.remove(id);
     };
-  }, [ready, resetKey]);
+  }, [ready, resetKey, action]);
 
   if (!turnstileSiteKey) return null;
 
