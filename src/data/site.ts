@@ -36,11 +36,9 @@ export const site = {
   email: "info@thequeensheadlittlebury.co.uk",
   whatsapp: "", // TODO WhatsApp business number, international format, no +, e.g. "447123456789"
 
+  // The pub's only social account.
   social: {
-    // Icons are hidden while a link is empty.
-    facebook: "", // TODO the pub's Facebook page
-    instagram: "https://www.instagram.com/thequeensheadlittlebury/", // TODO confirm this is the pub's account
-    tripadvisor: "https://www.tripadvisor.co.uk/Hotel_Review-g2145220-d545425-Reviews-Queens_Head_Inn-Littlebury_Essex_England.html",
+    instagram: "https://www.instagram.com/thequeensheadlittlebury/",
   },
 
   /**
