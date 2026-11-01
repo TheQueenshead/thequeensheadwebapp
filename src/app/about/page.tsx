@@ -19,13 +19,13 @@ export default function AboutPage() {
         eyebrow="Our story"
         title="A listed inn on the village High Street"
         lede="The Queen's Head is a timber-framed, Grade II listed inn in the heart of Littlebury — a mile from Audley End House and a mile and a half from Saffron Walden."
-        image="exteriorDay"
+        image="sharingTable"
       />
 
       <Section tone="cream">
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <div className="reveal relative aspect-[4/5] overflow-hidden rounded-[var(--radius-lg)] shadow-lift">
-            <Photo id="fireplace" sizes="(max-width: 1024px) 100vw, 50vw" />
+            <Photo id="familyDinner" sizes="(max-width: 1024px) 100vw, 50vw" />
           </div>
           <div>
             <SectionHead eyebrow="Who we are" title="The village pub, with rooms upstairs" />
@@ -35,16 +35,20 @@ export default function AboutPage() {
               or a bed for the night after a day out at Audley End.
             </p>
             <p className="mt-4">
-              Inside you&rsquo;ll find old beams and inglenook fireplaces, food and drink in
-              the bar and restaurant, and en-suite bedrooms upstairs for anyone who wants to
-              make a night of it.
+              Inside you&rsquo;ll find old beams and plenty of character, with Spanish tapas,
+              Mediterranean dishes and British pub classics on the menu, and bedrooms upstairs
+              for anyone who wants to make a night of it.
+            </p>
+            <p className="mt-4">
+              We&rsquo;re open to everyone Wednesday to Saturday from 6pm, and 7 days a week
+              for private bookings.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href="/book" className="btn btn-primary">
                 Book a table
               </Link>
-              <Link href="/rooms" className="btn btn-outline">
-                Stay with us
+              <Link href="/menu" className="btn btn-outline">
+                See the menu
               </Link>
             </div>
           </div>

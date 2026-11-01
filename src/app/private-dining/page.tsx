@@ -15,8 +15,8 @@ export default function PrivateDiningPage() {
       <PageHero
         eyebrow="Private dining & hire"
         title="Your celebration, our home"
-        lede="We're open 7 days a week for private bookings — from a birthday dinner to a big family celebration, with six bedrooms upstairs for whoever doesn't want the night to end."
-        image="privateDining"
+        lede="We're open 7 days a week for private bookings — from a birthday dinner to a big family celebration. Tell us what you have in mind and we'll make it happen."
+        image="candlelitParty"
       >
         <a href="#enquire" className="btn btn-gold">
           Send an enquiry
@@ -69,7 +69,7 @@ export default function PrivateDiningPage() {
       <Section tone="white">
         <div className="grid gap-12 lg:grid-cols-[1fr_1.2fr]">
           <div className="relative aspect-[4/5] overflow-hidden rounded-[var(--radius-lg)] shadow-lift">
-            <Photo id="celebration" sizes="(max-width: 1024px) 100vw, 40vw" />
+            <Photo id="friendsDinner" sizes="(max-width: 1024px) 100vw, 40vw" />
           </div>
           <div>
             <SectionHead
@@ -121,9 +121,8 @@ export default function PrivateDiningPage() {
               ]}
               note={
                 <Notice>
-                  Every enquiry is answered personally. A date is held only
-                  once we&rsquo;ve confirmed it with you and, for larger events, received a
-                  deposit.
+                  Every enquiry is answered personally. Your date is only held once
+                  we&rsquo;ve confirmed it with you.
                 </Notice>
               }
             />

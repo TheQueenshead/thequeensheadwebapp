@@ -147,6 +147,23 @@ export const images = {
     src: u("photo-1543007630-9710e4a00a20"),
     alt: "Friends gathered round a table on quiz night",
   },
+  // People eating — About and Private Dining pages
+  sharingTable: {
+    src: u("photo-1576867757603-05b134ebc379"),
+    alt: "Friends reaching across a table of small plates to share",
+  },
+  familyDinner: {
+    src: u("photo-1578496780896-7081cc23c111"),
+    alt: "A family eating dinner together around the table",
+  },
+  candlelitParty: {
+    src: u("photo-1601118964938-228a89955311"),
+    alt: "A group raising their glasses over a candlelit dinner table",
+  },
+  friendsDinner: {
+    src: u("photo-1533777419517-3e4017e2e15a"),
+    alt: "Friends sharing a toast over dinner",
+  },
   celebration: {
     src: u("photo-1530103862676-de8c9debad1d"),
     alt: "Friends raising glasses at a celebration",
