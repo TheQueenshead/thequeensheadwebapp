@@ -93,8 +93,8 @@ export default function Footer({ showBlog = true }: { showBlog?: boolean }) {
             </Link>
             <span>
               Website by{" "}
-              <a href="https://savv8.co.uk" className="hover:text-white">
-                Savv8
+              <a href="https://attable.io" target="_blank" rel="noopener noreferrer" className="hover:text-white">
+                Attable
               </a>
             </span>
           </p>
