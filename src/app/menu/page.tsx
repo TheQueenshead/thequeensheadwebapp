@@ -29,7 +29,7 @@ function MenuComingSoon() {
       <PageHero
         eyebrow="Food & drink"
         title="Our new menu is on its way"
-        lede="We're putting the finishing touches to our seasonal menu. It'll be here very soon, in the meantime the kitchen is open and we'd love to see you."
+        lede="We're putting the finishing touches to our seasonal menu. It'll be here very soon."
         image="steak"
       >
         <Link href="/book" className="btn btn-gold">
