@@ -64,7 +64,7 @@ export default function StoryVideo({ className = "" }: { className?: string }) {
                 </svg>
               </span>
               <span className="font-display text-xl text-white drop-shadow">
-                {hasVideo ? title : "Our story on film — coming soon"}
+                {hasVideo ? title : "Our story on film: coming soon"}
               </span>
             </span>
           </button>

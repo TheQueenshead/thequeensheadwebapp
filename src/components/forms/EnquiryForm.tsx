@@ -39,7 +39,7 @@ export default function EnquiryForm({
   fields,
   submitLabel = "Send enquiry",
   note,
-  successTitle = "Thank you — we've got your enquiry",
+  successTitle = "Thank you, we've got your enquiry",
   successBody = "One of the team will be in touch shortly to confirm. Nothing is booked until we've replied.",
 }: Props) {
   const [status, setStatus] = useState<"idle" | "sending" | "done" | "error">("idle");
@@ -51,7 +51,7 @@ export default function EnquiryForm({
     e.preventDefault();
     if (turnstileSiteKey && !captcha) {
       setStatus("error");
-      setError("The security check is still running — please try again in a moment. If this keeps happening, give us a call.");
+      setError("The security check is still running, please try again in a moment. If this keeps happening, give us a call.");
       return;
     }
     setStatus("sending");

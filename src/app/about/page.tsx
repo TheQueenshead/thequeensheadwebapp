@@ -18,19 +18,19 @@ export default function AboutPage() {
       <PageHero
         eyebrow="Our story"
         title="A listed inn on the village High Street"
-        lede="The Queen's Head is a timber-framed, Grade II listed inn in the heart of Littlebury — a mile from Audley End House and a mile and a half from Saffron Walden."
+        lede="The Queen's Head is a timber-framed, Grade II listed inn in the heart of Littlebury, a mile from Audley End House and a mile and a half from Saffron Walden."
         image="sharingTable"
       />
 
       <Section tone="cream">
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <div className="reveal relative aspect-[4/5] overflow-hidden rounded-[var(--radius-lg)] shadow-lift">
-            <Photo id="familyDinner" sizes="(max-width: 1024px) 100vw, 50vw" />
+            <Photo id="friendsToast" sizes="(max-width: 1024px) 100vw, 50vw" />
           </div>
           <div>
             <SectionHead eyebrow="Who we are" title="The village pub, with rooms upstairs" />
             <p className="text-lg">
-              We believe a pub should be the living room of its village — somewhere for a
+              We believe a pub should be the living room of its village, somewhere for a
               pint after work, a family celebration, a quiet dinner for two,
               or a bed for the night after a day out at Audley End.
             </p>

@@ -13,7 +13,7 @@ export default function NewsletterForm({ compact = false }: { compact?: boolean 
     e.preventDefault();
     if (turnstileSiteKey && !captcha) {
       setStatus("error");
-      setError("The security check is still running — please try again in a moment. If this keeps happening, give us a call.");
+      setError("The security check is still running, please try again in a moment. If this keeps happening, give us a call.");
       return;
     }
     setStatus("sending");
@@ -43,7 +43,7 @@ export default function NewsletterForm({ compact = false }: { compact?: boolean 
   if (status === "done") {
     return (
       <p role="status" className={compact ? "text-sm text-gold" : "font-medium text-wine"}>
-        You&rsquo;re on the list — see you soon.
+        You&rsquo;re on the list, see you soon.
       </p>
     );
   }

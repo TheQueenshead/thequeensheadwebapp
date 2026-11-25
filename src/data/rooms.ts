@@ -60,7 +60,7 @@ export const rooms: Room[] = [
   {
     slug: "the-orchard",
     name: "The Orchard",
-    short: "A cosy double tucked under the eaves — and dogs are welcome.",
+    short: "A cosy double tucked under the eaves, and dogs are welcome.",
     desc: "Up in the eaves with sloping ceilings and exposed timbers, The Orchard is the snuggest of our rooms. It's also our dog-friendly room, with a bed, bowl and a treat waiting for four-legged guests.",
     bed: "Double",
     sleeps: 2,
@@ -73,7 +73,7 @@ export const rooms: Room[] = [
   {
     slug: "the-meadow",
     name: "The Meadow",
-    short: "Flexible twin or king — ideal for friends or family.",
+    short: "Flexible twin or king, ideal for friends or family.",
     desc: "The Meadow can be set up as two comfortable singles or zipped together as a king, making it perfect for friends walking the countryside or family visiting for the weekend. En-suite with over-bath shower.",
     bed: "Twin or king (zip-and-link)",
     sleeps: 2,

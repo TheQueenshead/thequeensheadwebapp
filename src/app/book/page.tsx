@@ -56,7 +56,7 @@ export default async function BookPage({
           name: "event",
           label: "Event",
           hidden: true,
-          defaultValue: `${ev.title} — ${longDate(ev.date)}, ${ev.time}`,
+          defaultValue: `${ev.title}, ${longDate(ev.date)}, ${ev.time}`,
         },
       ]
     : [];
@@ -68,7 +68,7 @@ export default async function BookPage({
         title={ev ? `Book for ${ev.title}` : "Book a table"}
         lede={
           ev
-            ? `${longDate(ev.date)} · ${ev.time}. Send us your details and we'll confirm your table by email or phone — event nights fill up, so the sooner the better.`
+            ? `${longDate(ev.date)} · ${ev.time}. Send us your details and we'll confirm your table by email or phone, event nights fill up, so the sooner the better.`
             : "Send us your details and we'll confirm your table by email or phone. For groups of eight or more, tell us in the special requests box and we'll find the best table."
         }
         image="diningRoom"
@@ -90,7 +90,7 @@ export default async function BookPage({
               <div className="mb-8">
                 <Notice>
                   <p>
-                    You&rsquo;re booking for <strong>{ev.title}</strong> —{" "}
+                    You&rsquo;re booking for <strong>{ev.title}</strong>,{" "}
                     {longDate(ev.date)}, {ev.time}. We&rsquo;ve filled in the date and time
                     for you.{" "}
                     <Link href="/events" className="font-semibold text-wine">
@@ -119,7 +119,7 @@ export default async function BookPage({
                   receive our confirmation.
                 </Notice>
               }
-              successTitle="Request received — thank you"
+              successTitle="Request received, thank you"
               successBody={
                 ev
                   ? `We'll confirm your table for ${ev.title} by email or phone as soon as we can. If you don't hear from us within a day, please send us a message.`

@@ -14,7 +14,7 @@ export const attractions: { name: string; distance: string; desc: string; url: s
   {
     name: "Audley End Enchanted Railway",
     distance: "1 mile",
-    desc: "A miniature railway through the woods on the Audley End estate, with woodland trails, den building and seasonal themed train rides. A favourite with families — check the website for open dates.",
+    desc: "A miniature railway through the woods on the Audley End estate, with woodland trails, den building and seasonal themed train rides. A favourite with families, check the website for open dates.",
     url: "https://www.audley-end-railway.co.uk/",
   },
   {
@@ -32,7 +32,7 @@ export const attractions: { name: string; distance: string; desc: string; url: s
   {
     name: "Saffron Walden Museum",
     distance: "1.5 miles",
-    desc: "Founded in 1835, one of the oldest purpose-built museums in the country, beside the ruins of the 12th-century Walden Castle.",
+    desc: "Opened in 1835, one of the oldest purpose-built museums in the country, beside the ruins of the 12th-century Walden Castle.",
     url: "https://www.saffronwaldenmuseum.org/",
   },
   {
@@ -42,21 +42,21 @@ export const attractions: { name: string; distance: string; desc: string; url: s
     url: "https://fryartgallery.org/",
   },
   {
+    name: "Linton Zoo",
+    distance: "6 miles",
+    desc: "A 16-acre conservation zoo in the village of Linton, a good day out with children.",
+    url: "https://lintonzoo.com/",
+  },
+  {
     name: "IWM Duxford",
     distance: "7 miles",
     desc: "Britain's largest aviation museum, with nearly 200 aircraft across historic hangars on a former RAF airfield.",
     url: "https://www.iwm.org.uk/visits/iwm-duxford",
   },
   {
-    name: "Linton Zoo",
-    distance: "6 miles",
-    desc: "A 16-acre conservation zoo in the village of Linton — a good day out with children.",
-    url: "https://lintonzoo.com/",
-  },
-  {
     name: "Thaxted",
-    distance: "8 miles",
-    desc: "A small town with a timber-framed 15th-century Guildhall, John Webb's Windmill (built 1804) and the grand church of St John the Baptist.",
+    distance: "10 miles",
+    desc: "A small town with a timber-framed 15th-century Guildhall, the grand church of St John the Baptist and John Webb's Windmill (built 1804, currently closed to visitors for restoration).",
     url: "https://thaxted-pc.gov.uk/tourism/places-to-visit/the-windmill/",
   },
   {
@@ -90,7 +90,7 @@ export const walks: { name: string; distance?: string; desc: string; url: string
   },
   {
     name: "Icknield Way Path",
-    desc: "One of Britain's oldest routes passes a few miles west of the village, through Strethall to Great Chesterford — and the Harcamlow Way runs nearby past Audley End.",
+    desc: "One of Britain's oldest routes passes a few miles west of the village, through Strethall to Great Chesterford, and the Harcamlow Way runs nearby past Audley End.",
     url: "https://icknieldwaypath.co.uk/route/essex/",
     source: "Icknield Way Association",
   },

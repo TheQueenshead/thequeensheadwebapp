@@ -1,5 +1,5 @@
 ---
-draft: true # hidden until the content is checked — delete this line to publish
+draft: true # hidden until the content is checked, delete this line to publish
 title: "Seven hundred years of the Queen's Head"
 date: "2026-07-20"
 excerpt: "Coaching inn, courthouse, wartime billet. A short history of the building we're lucky enough to look after."
@@ -11,7 +11,7 @@ The oldest timbers in the Queen's Head were felled around 1340, which makes the 
 
 ## A hall house
 
-It began life as a hall house — a single tall room open to the rafters, with a fire in the middle of the floor and no chimney. Soot from those fires still blackens some of the roof timbers upstairs. The chimney stack and first floor were added in the Tudor period, when it seems to have become an inn for the first time.
+It began life as a hall house: a single tall room open to the rafters, with a fire in the middle of the floor and no chimney. Soot from those fires still blackens some of the roof timbers upstairs. The chimney stack and first floor were added in the Tudor period, when it seems to have become an inn for the first time.
 
 ## The coaching years
 
@@ -25,4 +25,4 @@ Records from the 1800s show the pub doubling as a manorial court and, on one mem
 
 We took the inn on in the belief that a village pub should be the living room of its village. We hope you'll agree it still is.
 
-Come and see for yourself — [book a table](/book) or [stay the night](/rooms).
+Come and see for yourself: [book a table](/book) or [stay the night](/rooms).

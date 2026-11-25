@@ -9,7 +9,7 @@ import { getInstagramPhotos } from "@/lib/instagram";
 export const metadata: Metadata = {
   title: "Gallery",
   description:
-    "Photos of The Queen's Head, Littlebury — the pub, our rooms, food and drink, the team and the surrounding Essex countryside.",
+    "Photos of The Queen's Head, Littlebury, the pub, our rooms, food and drink, the team and the surrounding Essex countryside.",
 };
 
 // Pick up new Instagram posts hourly (matches INSTAGRAM_REVALIDATE)
@@ -31,7 +31,7 @@ export default async function GalleryPage() {
         title="A look around"
         lede={
           fromInstagram
-            ? "Straight from our Instagram — the pub, the food, the people and whatever's been happening lately."
+            ? "Straight from our Instagram, the pub, the food, the people and whatever's been happening lately."
             : "The pub, the rooms, the food, the people and the countryside on our doorstep."
         }
         image="barInterior"

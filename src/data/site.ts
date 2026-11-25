@@ -48,7 +48,7 @@ export const site = {
    *         (only switch off once that content is real and signed off).
    */
   comingSoon: {
-    menu: false,
+    menu: true,
     rooms: true,
   },
 

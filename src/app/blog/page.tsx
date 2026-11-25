@@ -6,7 +6,7 @@ import NewsletterForm from "@/components/forms/NewsletterForm";
 import { getPosts, formatDate } from "@/lib/blog";
 
 export const metadata: Metadata = {
-  title: "Blog — News & Local Guides",
+  title: "Blog: News & Local Guides",
   description:
     "News from The Queen's Head, Littlebury: seasonal menus, events, the history of the inn and our guides to Saffron Walden, Audley End and the local countryside.",
 };

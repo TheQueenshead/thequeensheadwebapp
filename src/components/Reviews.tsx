@@ -21,7 +21,7 @@ export default function Reviews() {
         <SectionHead
           eyebrow="Kind words"
           title="What our guests say"
-          lede="We're proud of our reviews — and prouder still of the regulars who keep coming back."
+          lede="We're proud of our reviews, and prouder still of the regulars who keep coming back."
         />
         {rating && (
           <a

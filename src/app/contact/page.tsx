@@ -18,7 +18,7 @@ export default function ContactPage() {
       <PageHero
         eyebrow="Contact"
         title="Say hello"
-        lede="Get in touch or drop in — whichever suits. We're a small team, so if we don't pick up straight away we're probably carrying plates; we'll get back to you."
+        lede="Get in touch or drop in, whichever suits. We're a small team, so if we don't pick up straight away we're probably carrying plates; we'll get back to you."
         image="exteriorDay"
       />
 
@@ -84,7 +84,7 @@ export default function ContactPage() {
                   </div>
                 ))}
               </dl>
-              <p className="mt-3 text-xs text-muted">Open 7 days a week for private bookings — get in touch to arrange. Hours may vary over Christmas — check our socials.</p>
+              <p className="mt-3 text-xs text-muted">Open 7 days a week for private bookings. Get in touch to arrange. Hours may vary over Christmas, so check our socials.</p>
             </div>
 
             <div>
@@ -96,7 +96,7 @@ export default function ContactPage() {
               </address>
               <ul className="mt-4 space-y-2 text-sm text-body">
                 <li><strong>By car:</strong> on the High Street (B1383), a mile and a half north-west of Saffron Walden. The M11 (junction 9) is about three miles away.</li>
-                <li><strong>By train:</strong> Audley End station has direct trains from London Liverpool Street (from about 55 minutes) and Cambridge (about 20 minutes). It&rsquo;s about two miles from us — a short taxi ride, or a 45-minute walk.</li>
+                <li><strong>By train:</strong> Audley End station has direct trains from London Liverpool Street (from about 55 minutes) and Cambridge (about 20 minutes). It&rsquo;s about two miles from us, a short taxi ride, or a 45-minute walk.</li>
               </ul>
               <a href={site.map.directionsUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary mt-5">
                 Get directions
@@ -115,7 +115,7 @@ export default function ContactPage() {
                   { name: "subject", label: "What's it about?", type: "select", required: true, options: ["General question", "Feedback", "Lost property", "Supplier / trade", "Press", "Something else"] },
                   { name: "message", label: "Your message", type: "textarea", required: true },
                 ]}
-                successTitle="Message sent — thank you"
+                successTitle="Message sent, thank you"
                 successBody="We'll reply as soon as we can, usually within a day."
               />
             </div>
@@ -124,7 +124,7 @@ export default function ContactPage() {
       </Section>
       <CTABand
         title="Ready when you are"
-        text="No need to wait for a reply if all you want is a table — send a booking request and we'll confirm it."
+        text="No need to wait for a reply if all you want is a table, send a booking request and we'll confirm it."
         primary={{ href: "/book", label: "Book a table" }}
         secondary={{ href: "/events", label: "What's on" }}
       />

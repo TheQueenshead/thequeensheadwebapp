@@ -8,12 +8,12 @@ import { site } from "@/data/site";
 
 export const metadata: Metadata = site.comingSoon.menu
   ? {
-      title: "Menu — Coming Soon",
+      title: "Menu: Coming Soon",
       description:
         "Our new seasonal menu at The Queen's Head, Littlebury is coming soon. Kitchen opening times and table bookings.",
     }
   : {
-      title: "Menu — Food & Drink",
+      title: "Menu: Food & Drink",
       description:
         "Spanish tapas, Mediterranean dining and British pub classics at The Queen's Head, Littlebury. Full menu with dietary information.",
     };
@@ -29,7 +29,7 @@ function MenuComingSoon() {
       <PageHero
         eyebrow="Food & drink"
         title="Our new menu is on its way"
-        lede="We're putting the finishing touches to our seasonal menu. It'll be here very soon — in the meantime the kitchen is open and we'd love to see you."
+        lede="We're putting the finishing touches to our seasonal menu. It'll be here very soon, in the meantime the kitchen is open and we'd love to see you."
         image="steak"
       >
         <Link href="/book" className="btn btn-gold">
@@ -58,7 +58,7 @@ function MenuComingSoon() {
               <Notice>
                 <p>
                   <strong>Allergies or dietary needs?</strong> Please tell us when you book and
-                  again when you order — the team will talk you through what&rsquo;s on and adapt
+                  again when you order, the team will talk you through what&rsquo;s on and adapt
                   a dish where we safely can.
                 </p>
               </Notice>
@@ -91,7 +91,7 @@ function FullMenu() {
       <PageHero
         eyebrow="Food & drink"
         title="Cooked from scratch, every day"
-        lede="Spanish tapas, Mediterranean dining and British pub classics — small plates made for sharing, generous mains and a few old favourites done properly."
+        lede="Spanish tapas, Mediterranean dining and British pub classics, small plates made for sharing, generous mains and a few old favourites done properly."
         image="steak"
       >
         <Link href="/book" className="btn btn-gold">
@@ -132,7 +132,7 @@ function FullMenu() {
                 Our kitchen handles all 14 regulated
                 allergens, so while we take every care we cannot guarantee any dish is
                 completely free from traces. <strong>Please tell us about any allergy or
-                intolerance when you book and again when you order</strong> — we&rsquo;re
+                intolerance when you book and again when you order</strong>, we&rsquo;re
                 always happy to talk you through the menu or adapt a dish where we safely can.
               </p>
             </Notice>

@@ -74,11 +74,11 @@ export default function GiftCardsPage() {
               note={
                 <Notice>
                   Gift cards are paid for over the phone or by bank transfer once we&rsquo;ve
-                  confirmed your order — we don&rsquo;t take card details through the website.
+                  confirmed your order, we don&rsquo;t take card details through the website.
                   Questions? Email <a href={`mailto:${site.email}`}>{site.email}</a>.
                 </Notice>
               }
-              successTitle="Thanks — we'll be in touch"
+              successTitle="Thanks, we'll be in touch"
               successBody="We'll call or email to arrange payment and get your gift card on its way."
             />
           </div>
@@ -86,7 +86,7 @@ export default function GiftCardsPage() {
       </Section>
       <CTABand
         title="Not sure what to give?"
-        text="Dinner for two, an evening with friends or a night in one of our rooms — have a look and we'll help you decide."
+        text="Dinner for two, an evening with friends or a night in one of our rooms, have a look and we'll help you decide."
         primary={{ href: "/menu", label: "See the menu" }}
         secondary={{ href: "/rooms", label: "See the rooms" }}
       />

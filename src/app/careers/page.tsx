@@ -5,9 +5,9 @@ import { vacancies, perks } from "@/data/careers";
 import { site } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "Careers — Join the Team",
+  title: "Careers: Join the Team",
   description:
-    "Jobs at The Queen's Head, Littlebury — current vacancies and how to get in touch about working with us.",
+    "Jobs at The Queen's Head, Littlebury, current vacancies and how to get in touch about working with us.",
 };
 
 export default function CareersPage() {
@@ -87,7 +87,7 @@ export default function CareersPage() {
           <SectionHead
             eyebrow="Apply"
             title="Tell us about yourself"
-            lede="No CV yet? Don't worry — a few lines about you and your experience is plenty to start a conversation."
+            lede="No CV yet? Don't worry, a few lines about you and your experience is plenty to start a conversation."
             center
           />
           <div className="rounded-[var(--radius-lg)] bg-cream p-7 md:p-10">

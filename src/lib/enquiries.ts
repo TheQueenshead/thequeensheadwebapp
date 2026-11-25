@@ -10,26 +10,26 @@ export const enquiryTypes = {
     label: "Table booking request",
     subject: (d: Fields) =>
       d.event
-        ? `Event booking — ${d.event} — ${d.guests} guest(s)`
-        : `Table request — ${d.date} at ${d.time} for ${d.guests}`,
+        ? `Event booking: ${d.event}, ${d.guests} guest(s)`
+        : `Table request: ${d.date} at ${d.time} for ${d.guests}`,
   },
   room: {
     label: "Room availability enquiry",
     subject: (d: Fields) =>
-      `Room enquiry — ${d.checkIn} to ${d.checkOut} (${d.room ?? "any room"})`,
+      `Room enquiry: ${d.checkIn} to ${d.checkOut} (${d.room ?? "any room"})`,
   },
   "private-dining": {
     label: "Private dining & hire enquiry",
     subject: (d: Fields) =>
-      `Private dining enquiry — ${d.date} for ${d.guests} guests`,
+      `Private dining enquiry: ${d.date} for ${d.guests} guests`,
   },
   "gift-card": {
     label: "Gift card enquiry",
-    subject: (d: Fields) => `Gift card enquiry — £${d.amount}`,
+    subject: (d: Fields) => `Gift card enquiry: £${d.amount}`,
   },
   careers: {
     label: "Job application / enquiry",
-    subject: (d: Fields) => `Careers enquiry — ${d.role}`,
+    subject: (d: Fields) => `Careers enquiry: ${d.role}`,
   },
   contact: {
     label: "General enquiry",

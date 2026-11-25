@@ -14,7 +14,7 @@ export async function POST(req: Request) {
   const ip = clientIp(req);
   if (!rateLimit(`newsletter:${ip}`, 5, 10 * 60_000)) {
     return NextResponse.json(
-      { error: "Too many attempts — please try again in a few minutes." },
+      { error: "Too many attempts, please try again in a few minutes." },
       { status: 429 },
     );
   }
@@ -40,7 +40,7 @@ export async function POST(req: Request) {
   } catch (err) {
     console.error("Newsletter sign-up failed", err);
     return NextResponse.json(
-      { error: "Sorry — something went wrong. Please try again." },
+      { error: "Sorry, something went wrong. Please try again." },
       { status: 500 },
     );
   }

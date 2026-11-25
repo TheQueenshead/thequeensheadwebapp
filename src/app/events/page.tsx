@@ -52,7 +52,7 @@ export default function EventsPage() {
         <SectionHead eyebrow="Calendar" title="Coming up" />
         {months.length === 0 && (
           <p className="text-muted">
-            Nothing in the diary just now — sign up below and we&rsquo;ll tell you as soon as
+            Nothing in the diary just now, sign up below and we&rsquo;ll tell you as soon as
             something&rsquo;s announced.
           </p>
         )}
@@ -123,7 +123,7 @@ export default function EventsPage() {
             <SectionHead
               eyebrow="Newsletter"
               title="Be the first to know"
-              lede="Join the list and we'll email you when new events are announced — roughly once a month, never more."
+              lede="Join the list and we'll email you when new events are announced, roughly once a month, never more."
               light
             />
           </div>

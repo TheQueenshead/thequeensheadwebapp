@@ -5,7 +5,6 @@ import HeroVideo from "@/components/HeroVideo";
 import Reviews from "@/components/Reviews";
 import MapEmbed from "@/components/MapEmbed";
 import NewsletterForm from "@/components/forms/NewsletterForm";
-import BookingComLink from "@/components/BookingComLink";
 import { site } from "@/data/site";
 import { rooms } from "@/data/rooms";
 import { events } from "@/data/events";
@@ -64,7 +63,7 @@ export default function HomePage() {
             </p>
             <p className="mt-4 text-body">
               Good food, a well-kept bar and the same warm welcome for everyone who
-              walks in — whether it&rsquo;s your
+              walks in, whether it&rsquo;s your
               first visit or your five-hundredth.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
@@ -92,12 +91,12 @@ export default function HomePage() {
         <SectionHead
           eyebrow="What we do"
           title="Eat, drink, stay, celebrate"
-          lede="Four good reasons to find us — and a few more once you're here."
+          lede="Four good reasons to find us, and a few more once you're here."
           center
         />
         <div className="reveal-stagger grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           <ImageTile href="/menu" image="steak" subtitle="Eat" title="Food & Drink" tall />
-          <ImageTile href="/rooms" image="roomOne" subtitle="Stay" title="Six Bedrooms" tall />
+          <ImageTile href="/rooms" image={site.comingSoon.rooms ? "exteriorEvening" : "roomOne"} subtitle="Stay" title="Six Bedrooms" tall />
           <ImageTile href="/events" image="liveMusic" subtitle="What's on" title="Events" tall />
           <ImageTile href="/private-dining" image="privateDining" subtitle="Celebrate" title="Private Dining" tall />
         </div>
@@ -108,7 +107,7 @@ export default function HomePage() {
         <SectionHead
           eyebrow="Our story on film"
           title="Come and see for yourself"
-          lede="45 seconds behind the bar, in the kitchen and around the village — the Queen's Head as our regulars know it."
+          lede="45 seconds behind the bar, in the kitchen and around the village, the Queen's Head as our regulars know it."
           center
           light
         />
@@ -118,39 +117,18 @@ export default function HomePage() {
       </Section>
 
       {/* ---------- ROOMS ---------- */}
-      <Section tone="cream">
-        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-          <SectionHead
-            eyebrow="Stay with us"
-            title="Six rooms above the pub"
-            lede="Oak beams, deep mattresses, proper breakfasts. Each room is different; all of them are quiet."
-          />
-          <Link href="/rooms" className="btn btn-outline mb-12 shrink-0">
-            {site.comingSoon.rooms ? "Rooms & availability" : "All rooms & rates"}
-          </Link>
-        </div>
-        {site.comingSoon.rooms ? (
-          <div className="reveal grid items-center gap-8 overflow-hidden rounded-[var(--radius-lg)] bg-white shadow-soft md:grid-cols-2">
-            <div className="relative aspect-[4/3] h-full min-h-[260px]">
-              <Photo id="roomOne" sizes="(max-width: 768px) 100vw, 50vw" />
-            </div>
-            <div className="p-7 md:pr-10">
-              <p className="eyebrow mb-2">Room pages coming soon</p>
-              <h3 className="text-2xl md:text-3xl">See our rooms and book your stay</h3>
-              <p className="mt-3 text-muted">
-                {site.bookingComUrl
-                  ? "Photos, rates and live availability for every room are on our Booking.com page — or send us an enquiry and book direct."
-                  : "Send us an enquiry with your dates and we'll come straight back to you with availability and rates."}
-              </p>
-              <div className="mt-6 flex flex-wrap gap-3">
-                <BookingComLink className="btn btn-primary" />
-                <Link href="/rooms#enquire" className="btn btn-outline">
-                  Enquire direct
-                </Link>
-              </div>
-            </div>
+      {!site.comingSoon.rooms && (
+        <Section tone="cream">
+          <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+            <SectionHead
+              eyebrow="Stay with us"
+              title="Six rooms above the pub"
+              lede="Oak beams, deep mattresses, proper breakfasts. Each room is different; all of them are quiet."
+            />
+            <Link href="/rooms" className="btn btn-outline mb-12 shrink-0">
+              All rooms &amp; rates
+            </Link>
           </div>
-        ) : (
           <div className="reveal-stagger grid gap-6 md:grid-cols-3">
             {featuredRooms.map((r) => (
               <Link
@@ -173,8 +151,8 @@ export default function HomePage() {
               </Link>
             ))}
           </div>
-        )}
-      </Section>
+        </Section>
+      )}
 
       {/* ---------- EVENTS ---------- */}
       <Section tone="white">
@@ -192,7 +170,7 @@ export default function HomePage() {
               <div>
                 <p className="font-display text-2xl text-ink">Nothing in the diary just yet</p>
                 <p className="mx-auto mt-2 max-w-[40ch] text-muted">
-                  New events are on their way — join the newsletter and you&rsquo;ll be the
+                  New events are on their way, join the newsletter and you&rsquo;ll be the
                   first to hear.
                 </p>
               </div>

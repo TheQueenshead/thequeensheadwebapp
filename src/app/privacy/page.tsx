@@ -22,7 +22,7 @@ export default function PrivacyPage() {
           <h2>What we collect</h2>
           <p>
             When you send an enquiry (table booking, room availability, private dining, gift
-            card, careers or general contact) we collect the details you enter — typically your
+            card, careers or general contact) we collect the details you enter, typically your
             name, email address, phone number and the content of your message. When you join
             our newsletter we collect your email address and, optionally, your first name.
           </p>

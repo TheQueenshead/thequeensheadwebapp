@@ -7,12 +7,12 @@ import { site } from "@/data/site";
 
 export const metadata: Metadata = site.comingSoon.rooms
   ? {
-      title: "Rooms — Stay at the Inn",
+      title: "Rooms: Stay at the Inn",
       description:
         "Bedrooms above a 14th-century pub in Littlebury, near Saffron Walden and Audley End. See our rooms and rates, or send us an availability enquiry.",
     }
   : {
-      title: "Rooms — Stay at the Inn",
+      title: "Rooms: Stay at the Inn",
       description:
         "Six characterful bedrooms above a 14th-century pub in Littlebury, near Saffron Walden and Audley End. Breakfast included, dogs welcome, free parking. Check availability.",
     };
@@ -31,10 +31,10 @@ function RoomsComingSoon() {
         title="Rooms above the pub"
         lede={
           hasListing
-            ? "Our room pages are coming soon. In the meantime you can see every room — with photos, rates and live availability — on Booking.com."
+            ? "Our room pages are coming soon. In the meantime you can see every room (with photos, rates and live availability) on Booking.com."
             : "Our room pages are coming soon. In the meantime, send us an enquiry and we'll get straight back to you with availability and rates."
         }
-        image="roomSix"
+        image="exteriorEvening"
       >
         <BookingComLink />
         <a href="#enquire" className={hasListing ? "btn btn-outline-light" : "btn btn-gold"}>
@@ -49,7 +49,7 @@ function RoomsComingSoon() {
             title="A proper look at our rooms"
             lede={
               hasListing
-                ? "We're putting together photos and details of each room for this page. Until then, everything you need — and instant booking — is on our Booking.com page."
+                ? "We're putting together photos and details of each room for this page. Until then, everything you need, and instant booking, is on our Booking.com page."
                 : "We're putting together photos and details of each room for this page. Check back soon, or get in touch and we'll tell you all about them."
             }
             center
@@ -210,7 +210,7 @@ function RoomEnquiry({ roomNames }: { roomNames?: string[] }) {
         <SectionHead
           eyebrow="Availability enquiry"
           title="Check availability"
-          lede="Tell us when you'd like to come and which room you have in mind. We'll reply with availability and how to confirm your booking — usually within a few hours."
+          lede="Tell us when you'd like to come and which room you have in mind. We'll reply with availability and how to confirm your booking, usually within a few hours."
           center
         />
         <div className="rounded-[var(--radius-lg)] bg-white p-7 shadow-lift md:p-10">
@@ -224,17 +224,17 @@ function RoomEnquiry({ roomNames }: { roomNames?: string[] }) {
                 ? [{ name: "room", label: "Preferred room", type: "select" as const, half: true, options: ["Any room", ...roomNames] }]
                 : []),
               { name: "adults", label: "Adults", type: "number", min: 1, max: 12, required: true, half: true },
-              { name: "dogs", label: "Bringing a dog?", type: "select", half: true, options: ["No", "Yes — one dog", "Yes — two dogs"] },
+              { name: "dogs", label: "Bringing a dog?", type: "select", half: true, options: ["No", "Yes, one dog", "Yes, two dogs"] },
               { name: "requests", label: "Anything else we should know?", type: "textarea", placeholder: "Special occasion, dietary needs, late arrival…" },
             ]}
             note={
               <Notice>
                 This is an availability enquiry rather than an instant booking. We&rsquo;ll
-                confirm availability and take your booking by email or phone — nothing is
+                confirm availability and take your booking by email or phone, nothing is
                 reserved until you hear from us.
               </Notice>
             }
-            successTitle="Thanks — we'll check the diary"
+            successTitle="Thanks, we'll check the diary"
             successBody="We'll email you shortly with availability and how to confirm your stay."
           />
         </div>

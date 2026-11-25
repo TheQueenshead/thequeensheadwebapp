@@ -68,7 +68,7 @@ export async function getInstagramPhotos(): Promise<GalleryItem[]> {
     }
     return items;
   } catch (err) {
-    console.error("Instagram (Behold) feed failed — showing fallback gallery", err);
+    console.error("Instagram (Behold) feed failed, showing fallback gallery", err);
     return [];
   }
 }

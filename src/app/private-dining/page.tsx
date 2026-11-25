@@ -6,7 +6,7 @@ import { spaces, setMenus } from "@/data/spaces";
 export const metadata: Metadata = {
   title: "Private Dining & Venue Hire",
   description:
-    "Private bookings 7 days a week at The Queen's Head, Littlebury — birthdays, celebrations, wakes, christenings and company dinners.",
+    "Private bookings 7 days a week at The Queen's Head, Littlebury, birthdays, celebrations, wakes, christenings and company dinners.",
 };
 
 export default function PrivateDiningPage() {
@@ -15,7 +15,7 @@ export default function PrivateDiningPage() {
       <PageHero
         eyebrow="Private dining & hire"
         title="Your celebration, our home"
-        lede="We're open 7 days a week for private bookings — from a birthday dinner to a big family celebration. Tell us what you have in mind and we'll make it happen."
+        lede="We're open 7 days a week for private bookings, from a birthday dinner to a big family celebration. Tell us what you have in mind and we'll make it happen."
         image="candlelitParty"
       >
         <a href="#enquire" className="btn btn-gold">
@@ -28,7 +28,7 @@ export default function PrivateDiningPage() {
         <SectionHead
           eyebrow="Our spaces"
           title={spaces.length === 1 ? "Our space" : "Ways to gather"}
-          lede="Capacities are a guide — tell us about your event and we'll suggest the right space and layout."
+          lede="Capacities are a guide, tell us about your event and we'll suggest the right space and layout."
         />
         <div className="reveal-stagger grid gap-8 md:grid-cols-2">
           {spaces.map((s) => (
@@ -113,7 +113,7 @@ export default function PrivateDiningPage() {
                 { name: "date", label: "Preferred date", type: "date", required: true, half: true },
                 { name: "guests", label: "Number of guests", type: "number", min: 2, max: 200, required: true, half: true },
                 ...(spaces.length
-                  ? [{ name: "space", label: "Space", type: "select" as const, half: true, options: ["Not sure — advise me", ...spaces.map((s) => s.name)] }]
+                  ? [{ name: "space", label: "Space", type: "select" as const, half: true, options: ["Not sure, advise me", ...spaces.map((s) => s.name)] }]
                   : []),
                 { name: "eventType", label: "Type of event", type: "select", half: true, options: ["Birthday", "Wedding / reception", "Anniversary", "Wake / celebration of life", "Christening", "Corporate dinner or meeting", "Christmas party", "Other"] },
                 { name: "budget", label: "Approximate budget per head (optional)", half: true, placeholder: "e.g. £40" },

@@ -152,9 +152,9 @@ export const images = {
     src: u("photo-1576867757603-05b134ebc379"),
     alt: "Friends reaching across a table of small plates to share",
   },
-  familyDinner: {
-    src: u("photo-1578496780896-7081cc23c111"),
-    alt: "A family eating dinner together around the table",
+  friendsToast: {
+    src: "/images/friends-toast-dinner.jpg", // Pixabay #8381812
+    alt: "Friends raising a toast over dinner by candlelight",
   },
   candlelitParty: {
     src: u("photo-1601118964938-228a89955311"),

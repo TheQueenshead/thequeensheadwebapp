@@ -50,14 +50,14 @@ function requireLiveConfig(names: string[]) {
 /** Resend returns errors rather than throwing — turn them into exceptions. */
 async function send(email: Parameters<Resend["emails"]["send"]>[0]) {
   const { error } = await resend!.emails.send(email);
-  if (error) throw new Error(`Resend: ${error.name} — ${error.message}`);
+  if (error) throw new Error(`Resend: ${error.name}: ${error.message}`);
 }
 
 function rows(payload: EnquiryPayload) {
   const base: [string, string][] = [
     ["Name", payload.name],
     ["Email", payload.email],
-    ["Phone", payload.phone || "—"],
+    ["Phone", payload.phone || "Not given"],
   ];
   const extra = Object.entries(payload.fields)
     .filter(([, v]) => v && v.trim())
@@ -127,7 +127,7 @@ export async function sendEnquiry(payload: EnquiryPayload) {
     from: FROM,
     to: payload.email,
     replyTo: TO,
-    subject: `We've received your ${label.toLowerCase()} — ${site.name}`,
+    subject: `We've received your ${label.toLowerCase()} | ${site.name}`,
     html: wrap(
       `Thank you, ${payload.name.split(" ")[0].slice(0, 30)}`,
       `<p>We've received your ${label.toLowerCase()} and one of the team will be in touch shortly to confirm.</p>
@@ -154,6 +154,6 @@ export async function addNewsletterContact(email: string, name?: string) {
     lastName: rest.join(" ") || undefined,
     unsubscribed: false,
   });
-  if (error) throw new Error(`Resend: ${error.name} — ${error.message}`);
+  if (error) throw new Error(`Resend: ${error.name}: ${error.message}`);
   return { demo: false };
 }

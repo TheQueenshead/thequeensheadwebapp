@@ -31,7 +31,7 @@ const workSans = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} — Pub, Restaurant & Rooms in Littlebury, Essex`,
+    default: `${site.name} | Pub, Restaurant & Rooms in Littlebury, Essex`,
     template: `%s | ${site.name}, Littlebury`,
   },
   description: site.description,

@@ -14,7 +14,7 @@ export default function Logo({
   return (
     <Link
       href="/"
-      aria-label="The Queen's Head, Littlebury — home"
+      aria-label="Home: The Queen's Head, Littlebury"
       className={`flex items-center gap-2 no-underline sm:gap-3 hover:no-underline ${className}`}
     >
       <span
